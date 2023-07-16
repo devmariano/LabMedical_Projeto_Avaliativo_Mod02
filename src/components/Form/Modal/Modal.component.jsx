@@ -13,7 +13,6 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
   } = useForm();
 
 
-
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>

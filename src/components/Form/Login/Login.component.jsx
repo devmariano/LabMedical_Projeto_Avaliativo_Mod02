@@ -33,10 +33,14 @@ export const FormLoginComponent = () => {
 
   const createUser = (data) => {
     console.log(data);
-    // Call the UserService.create function here
     UserService.Create(data);
-    setIsModalOpen(false); // Close the modal after successful user creation
+    setIsModalOpen(false); 
   };
+
+  const perdeuSenha = () => {
+      alert('Esta funcionalidade está em construção');
+      return;
+    }
 
   const submitForm = (data) => {
     const { email, password } = data;
@@ -112,7 +116,7 @@ export const FormLoginComponent = () => {
       <Styled.Button $active={ !errors.email && !errors.password } type='submit' disabled={ errors.email || errors.password }>Entrar</Styled.Button>
 
       <Styled.ActionBase>
-        <Styled.EsqueciSenha>Esqueci minha senha</Styled.EsqueciSenha>
+        <Styled.EsqueciSenha type='button' onClick={perdeuSenha} >Esqueci minha senha</Styled.EsqueciSenha>
       </Styled.ActionBase>
 
     </Styled.Form>
