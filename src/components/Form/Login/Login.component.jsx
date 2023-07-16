@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +7,8 @@ import { AuthContext } from '../../../contexts/auth/auth.context';
 import { InputComponent } from '../Input/Input.component';
 import * as Styled from './Login.style';
 import { UserService } from '../../../services/User/User.service';
+import { ModalComponent } from '../Modal/Modal.component';
+import { Button } from 'react-bootstrap';
 
 export const FormLoginComponent = () => {
 
@@ -20,12 +23,20 @@ export const FormLoginComponent = () => {
 
   const { setAuth } = useContext(AuthContext);
 
-  const createUser = () => {
-    UserService.Create({
-        email: 'emailteste@teste.com',
-        password: '12345678'
-    })
-  }
+  // const createUser = () => {
+  //   UserService.Create({
+  //       email: 'emailteste@teste.com',
+  //       password: '12345678'
+  //   })
+  // }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const createUser = (data) => {
+    console.log(data);
+    // Call the UserService.create function here
+    UserService.Create(data);
+    setIsModalOpen(false); // Close the modal after successful user creation
+  };
 
   const submitForm = (data) => {
     const { email, password } = data;
@@ -49,14 +60,29 @@ export const FormLoginComponent = () => {
     navigate('/');
   }
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return(
     
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
       <Styled.Header>
       <Styled.ActionTop>
       <Styled.Text>Não possui uma conta?</Styled.Text>
-      <Styled.Button $outlined={true} type='button' onClick={createUser}>Criar conta</Styled.Button>
+      {/* <Styled.Button $outlined={true} type='button' onClick={createUser}>Criar conta</Styled.Button> */}
+      <Styled.Button $outlined={true} type='button' onClick={openModal}>Criar conta</Styled.Button>
       </Styled.ActionTop>
+      {/* Render the React Bootstrap modal */}
+      <ModalComponent
+        show={isModalOpen}
+        onClose={closeModal}
+        onSubmit={createUser}
+      />
       <Styled.Logo/>
         <Styled.Title>Login</Styled.Title>
       </Styled.Header>
@@ -88,6 +114,8 @@ export const FormLoginComponent = () => {
       <Styled.ActionBase>
         <Styled.EsqueciSenha>Esqueci minha senha</Styled.EsqueciSenha>
       </Styled.ActionBase>
+
     </Styled.Form>
+    
   )
 }
