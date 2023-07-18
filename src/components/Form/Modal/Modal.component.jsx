@@ -21,6 +21,18 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
       <Modal.Body>
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.InputGroup>
+          <InputComponent
+              id='nome'
+              type='text'
+              placeholder='Digite seu nome'
+              label='Nome'
+              register={{
+                ...register('nome', {
+                  required: true,
+                })
+              }}
+              error={errors.nome}
+            />
             <InputComponent
               id='email'
               type='email'
