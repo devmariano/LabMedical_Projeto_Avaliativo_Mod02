@@ -56,7 +56,8 @@ export const Button = styled.button`
 `;
 
 Button.propTypes = {
-  $outlined: PropTypes.bool
+  $outlined: PropTypes.bool,
+  $active: PropTypes.bool,
 }
 
 export const ActionTop = styled.div`

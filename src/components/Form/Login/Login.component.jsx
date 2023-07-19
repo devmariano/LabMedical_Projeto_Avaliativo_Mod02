@@ -23,12 +23,6 @@ export const FormLoginComponent = () => {
 
   const { setAuth } = useContext(AuthContext);
 
-  // const createUser = () => {
-  //   UserService.Create({
-  //       email: 'emailteste@teste.com',
-  //       password: '12345678'
-  //   })
-  // }
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const createUser = (data) => {
@@ -45,7 +39,7 @@ export const FormLoginComponent = () => {
   const submitForm = (data) => {
     const { email, password } = data;
 
-    // const user = users.find(u => u.email === email);
+
     const user = UserService.ShowByEmail(email);
 
     if(!user) {
@@ -78,10 +72,10 @@ export const FormLoginComponent = () => {
       <Styled.Header>
       <Styled.ActionTop>
       <Styled.Text>Não possui uma conta?</Styled.Text>
-      {/* <Styled.Button $outlined={true} type='button' onClick={createUser}>Criar conta</Styled.Button> */}
+
       <Styled.Button $outlined={true} type='button' onClick={openModal}>Criar conta</Styled.Button>
       </Styled.ActionTop>
-      {/* Render the React Bootstrap modal */}
+
       <ModalComponent
         show={isModalOpen}
         onClose={closeModal}
