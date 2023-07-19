@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 
 export const InputGroup = styled.div`
@@ -62,3 +63,9 @@ export const Icon = styled.button`
 
   color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#549ABB'}};;
 `
+
+Icon.propTypes = {$color: PropTypes.string }
+Label.propTypes = {$color: PropTypes.string }
+Input.propTypes = {$color: PropTypes.string }
+TextArea.propTypes = {$color: PropTypes.string }
+
