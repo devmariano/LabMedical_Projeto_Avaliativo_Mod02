@@ -108,7 +108,7 @@ export const Logo = styled.div`
   min-height: 130px;
   align-items: center;
   padding-bottom: 2rem;
-  background-image: url('/logo-gd.png');
+  background-image: url('./images/logo-gd.png');
   background-repeat: no-repeat;
   background-position: center;
 `;
