@@ -4,24 +4,12 @@ import { HomePage } from './pages/Home/Home.page';
 
 import { LocalStorageService } from './services/User/LocalStorage.service';
 import { LoginPage } from './pages/Login.page';
+import userData from './data/userData.json';
 
-
+console.log(userData.users);
 
 if(!LocalStorageService.get('users')) {
-  LocalStorageService.set('users', [
-    {
-      id: 1,
-      nome: 'Admin',
-      email: 'admin@labmedical.com',
-      password: '12345678'
-    },
-    {
-      id: 2,
-      nome: 'Atendente',
-      email: 'usuario@labmedical.com',
-      password: '12345678'
-    },
-  ])
+  LocalStorageService.set('users', [...userData.users])
 }
 
 function App() {

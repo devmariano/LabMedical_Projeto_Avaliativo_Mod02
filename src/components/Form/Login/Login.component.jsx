@@ -26,12 +26,12 @@ export const FormLoginComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const createUser = (data) => {
-    console.log(data);
+    delete data.confirmPassword;
     UserService.Create(data);
     setIsModalOpen(false); 
   };
 
-  const perdeuSenha = () => {
+  const lostPassword = () => {
       alert('Esta funcionalidade está em construção');
       return;
     }
@@ -110,7 +110,7 @@ export const FormLoginComponent = () => {
       <Styled.Button $active={ !errors.email && !errors.password } type='submit' disabled={ errors.email || errors.password }>Entrar</Styled.Button>
 
       <Styled.ActionBase>
-        <Styled.EsqueciSenha type='button' onClick={perdeuSenha} >Esqueci minha senha</Styled.EsqueciSenha>
+        <Styled.EsqueciSenha type='button' onClick={lostPassword} >Esqueci minha senha</Styled.EsqueciSenha>
       </Styled.ActionBase>
 
     </Styled.Form>

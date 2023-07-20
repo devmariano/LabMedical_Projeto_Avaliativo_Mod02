@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 import { InputComponent } from '../Input/Input.component';
 import * as Styled from './Modal.style';
 
@@ -10,7 +10,13 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
+
+  const validatePasswordConfirmation = (value) => {
+    const password = getValues('password');
+    return value === password || 'As senhas não coincidem.';
+  };
 
 
   return (
@@ -22,7 +28,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.InputGroup>
           <InputComponent
-              id='nome'
+              id='modalNome'
               type='text'
               placeholder='Digite seu nome'
               label='Nome'
@@ -34,7 +40,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               error={errors.nome}
             />
             <InputComponent
-              id='email'
+              id='modaltroEmail'
               type='email'
               placeholder='Digite seu email'
               label='E-mail'
@@ -47,16 +53,31 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               error={errors.email}
             />
             <InputComponent
-              id='password'
+              id='modalPassword'
               type='password'
               placeholder='Digite uma senha'
               label='Senha'
               register={{ ...register('password', { required: true, minLength: 8 }) }}
               error={errors.password}
             />
+            <InputComponent
+              id='modalConfirmPassword' // Adicione um novo campo para confirmação de senha
+              type='password'
+              placeholder='Confirme sua senha'
+              label='Confirme sua senha'
+              register={{
+                ...register('confirmPassword', {
+                  required: true,
+                  minLength: 8,
+                  validate: validatePasswordConfirmation,
+                }),
+              }}
+              error={errors.confirmPassword}
+            />
+            
           </Styled.InputGroup>
 
-          <Styled.Button $active={!errors.email && !errors.password} type='submit' disabled={errors.email || errors.password}>Criar</Styled.Button>
+          <Styled.Button $active={!errors.email && !errors.password && !errors.confirmPassword} type='submit' disabled={errors.email || errors.password || errors.confirmPassword}>Criar</Styled.Button>
 
           <Styled.Button $outlined={true} type='button' onClick={onClose}>Voltar</Styled.Button>
 
