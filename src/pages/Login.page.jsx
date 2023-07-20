@@ -11,10 +11,10 @@ export const LoginPage = () => {
         <>
         <Container fluid className='g-0'>
         <Row className='g-0'>  
-        <Col md={8} className="d-none d-md-flex" >
+        <Col className="d-none d-md-flex" >
             <Styled.bgImage/>
         </Col>
-        <Col md={4} >
+        <Col className="col-md-auto ml-auto">
             <Styled.Login>
             <FormLoginComponent/>
             </Styled.Login>
