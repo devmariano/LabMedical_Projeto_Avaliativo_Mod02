@@ -1,12 +1,20 @@
+import { Outlet } from 'react-router';
+import { Navigate } from "react-router";
+import { useContext } from "react"
+
 import { SideBar } from '../components/SideBar/Sidebar.component';
 import { ToolBar } from '../components/ToolBar/ToolBar.Component';
-import { HomePage } from '../pages/Home/Home.page';
+
+import { AuthContext } from "../contexts/auth/auth.context";
+
 import * as Styled from './Layout.style';
-import { Outlet } from 'react-router';
+
 
 
 export const Layout = () => {
-  
+const { auth } = useContext(AuthContext);
+
+const render = () => {
   return(
     <Styled.App>
          <SideBar/>
@@ -18,4 +26,6 @@ export const Layout = () => {
             </Styled.Main>
     </Styled.App>
   );
+  }
+  return auth.isLogged ? render() : <Navigate to='/login'/>
 }
