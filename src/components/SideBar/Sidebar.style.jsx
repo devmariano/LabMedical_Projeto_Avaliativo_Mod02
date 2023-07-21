@@ -26,7 +26,8 @@ export const Button = styled.button`
   align-self: stretch;
   border-radius: 0.5rem;
   background: #549ABB;
-  border: 1px solid #ffffffa7;
+  border: none;
+  outline: 1px solid #ffffffa7;
   color: #ffffff; 
   font-size: 1rem;
   font-style: normal;
@@ -36,7 +37,7 @@ export const Button = styled.button`
   
   &:hover {
     background: #418fb3;
-    border: 2px solid #ffffffa7;
+    outline: 2px solid #ffffffa7;
   }
  
   svg {
