@@ -10,7 +10,6 @@ import { AuthContext } from "../contexts/auth/auth.context";
 import * as Styled from './Layout.style';
 
 
-
 export const Layout = () => {
 const { auth } = useContext(AuthContext);
 

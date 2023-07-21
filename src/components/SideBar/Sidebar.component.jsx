@@ -25,7 +25,7 @@ export const SideBar = () => {
       </Styled.MenuGroup>
       <Styled.MenuGroup>
         <Styled.Title>PACIENTES</Styled.Title>
-        <Styled.Button onClick={() => navigate('/cadastrar')} $withIcon>
+        <Styled.Button onClick={() => navigate('/cadastrarusuario')} $withIcon>
           <FaPlus />CADASTRAR
           </Styled.Button>
         <Styled.Button onClick={() => navigate('/listarprontuario')} $withIcon>
