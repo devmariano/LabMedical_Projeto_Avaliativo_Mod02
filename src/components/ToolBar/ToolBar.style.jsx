@@ -15,15 +15,13 @@ export const ToolBar = styled.div`
 `;
 
 export const UserIcon = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 55px;
+  height: 55px;
+  margin-left: 15px;
+  margin-right: 30px;
   display: flex;
   justify-content: center;
   border-radius: 50%;
-  overflow: hidden;
-
 `;
 
 export const Title = styled.legend`
