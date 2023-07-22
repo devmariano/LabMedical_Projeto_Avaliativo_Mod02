@@ -1,14 +1,20 @@
 import styled from 'styled-components'
- // Replace 'YourIconName' with the desired icon from react-icons library
+import PropTypes from 'prop-types';
+
 
 
 export const Sidebar = styled.div`
-  width: ${({$open}) => $open ? '20%' : '10%'};
+  width: ${({$open}) => $open ? '20%' : '0'};
   height: 100%;
   max-width: 17rem;
-  min-width: 10%;
+  min-width: ${({$open}) => $open ? '12rem' : '0'};
   background-color: #549ABB;
-`;
+  `;
+  
+Sidebar.propTypes = {
+    $open: PropTypes.bool,
+  }
+ 
 
 export const MenuGroup = styled.div`
   display: flex;
