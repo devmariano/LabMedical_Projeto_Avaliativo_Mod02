@@ -38,7 +38,7 @@ export const SideBar = () => {
           <FaPlus /> CADASTRAR CONSULTA
         </Styled.Button>
         <Styled.Button onClick={() => navigate('/cadastrarexame')} $withIcon>
-          <FaAlignJustify /> CADASTRAR EXAME
+          <FaPlus /> CADASTRAR EXAME
         </Styled.Button>
       </Styled.MenuGroup>
       <Styled.imgButton onClick={() => {setMenuOpen(!menuOpen)}} $withIcon>
