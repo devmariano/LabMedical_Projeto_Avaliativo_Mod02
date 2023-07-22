@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 export const Sidebar = styled.div`
   width: ${({$open}) => $open ? '20%' : '0'};
   height: 100%;
-  max-width: 17rem;
-  min-width: ${({$open}) => $open ? '12rem' : '0'};
+  max-width: 16rem;
+  min-width: ${({$open}) => $open ? '15rem' : '0'};
   background-color: #549ABB;
+  padding-left: ${({$open}) => $open ? '0.625rem' : '0'};
+  padding-right: ${({$open}) => $open ? '0.625rem' : '0'};
   `;
   
 Sidebar.propTypes = {
@@ -32,18 +34,17 @@ export const Button = styled.button`
   align-self: stretch;
   border-radius: 0.5rem;
   background: #549ABB;
-  border: none;
-  outline: 1px solid #ffffffa7;
+  border: 1px solid #ffffffa7;
   color: #ffffff; 
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
   
   &:hover {
-    background: #418fb3;
-    outline: 2px solid #ffffffa7;
+    background: #4b94b5;
+    outline: 1px solid #ffffffa7;
   }
  
   svg {
@@ -70,12 +71,18 @@ export const imgButton = styled.button`
   border: none;
   color: #ffffff; 
   cursor: pointer;
+  gap: 0.625rem;
 
  
   svg {
     margin-right: 20px;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
+
+  &:hover {
+    font-weight: 600;
+  }
+  
 `;
 
 export const Logo = styled.img`

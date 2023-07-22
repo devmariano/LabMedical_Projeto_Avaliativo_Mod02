@@ -5,17 +5,27 @@ import { useContext } from "react"
 import { SideBar } from '../components/SideBar/Sidebar.component';
 import { ToolBar } from '../components/ToolBar/ToolBar.Component';
 
+
 import { AuthContext } from "../contexts/auth/auth.context";
+import { MenuProvider } from "../contexts/menu/menu.context";
 
 import * as Styled from './Layout.style';
 
 
 export const Layout = () => {
-const { auth } = useContext(AuthContext);
+
+const { auth, menuOpen, setMenuOpen } = useContext(AuthContext);
 
 const render = () => {
   return(
+
+    <MenuProvider>
     <Styled.App>
+    {menuOpen === false && (
+          <Styled.OpenButton onClick={() => setMenuOpen(true)}>
+            &#9776;
+          </Styled.OpenButton>
+        )}
          <SideBar/>
             <Styled.Main>
                 <ToolBar/>
@@ -24,6 +34,7 @@ const render = () => {
                 </Styled.Content>
             </Styled.Main>
     </Styled.App>
+    </MenuProvider>
   );
   }
   return auth.isLogged ? render() : <Navigate to='/login'/>
