@@ -1,35 +1,35 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Card as BootstrapCard } from 'react-bootstrap';
-import { FaUser, FaStethoscope, FaFileMedical } from 'react-icons/fa';
-import { Layout } from './../../layout/Layout';
 
 export const CardWrapper = styled(BootstrapCard)`
-  max-width: 20em;
   margin-bottom: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   border:none;
-  outline: 2px solid #549abb5a;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  background-color: ${props => props.color}; 
 `;
+
+PropTypes.CardWrapper = {
+    $props: PropTypes.color,
+}
 
 export const IconWrapper = styled.div`
   font-size: 4rem;
-  color: #549ABB;
+  color: #FFF; 
   margin-bottom: 0.3rem;
 `;
 
 export const Title = styled.h3`
   font-size: 18px;
-  color: #313131;
+  color: #FFF; 
   margin-bottom: 2rem;
 `;
 
 export const Value = styled.p`
-  font-size: 5rem;
-  color: #794fbdd2;
+  font-size: 4rem;
+  color: #FFF; 
   font-family: fantasy, Helvetica, sans-serif;
 `;

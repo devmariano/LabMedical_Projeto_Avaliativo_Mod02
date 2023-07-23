@@ -18,7 +18,7 @@ export const Main = styled.main`
 
 export const Content = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: #fff;
   color: #666;
