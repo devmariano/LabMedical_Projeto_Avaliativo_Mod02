@@ -1,13 +1,13 @@
 import { LocalStorageService } from "../LocalStorage.service";
 
-const PATIENTS_KEY = 'patients';
+const patientsList = 'patients';
 
 const getPatients = () => {
-  return LocalStorageService.get(PATIENTS_KEY) || [];
+  return LocalStorageService.get(patientsList) || [];
 };
 
 const savePatients = (patients) => {
-  LocalStorageService.set(PATIENTS_KEY, patients);
+  LocalStorageService.set(patientsList, patients);
 };
 
 const createPatient = (data) => {

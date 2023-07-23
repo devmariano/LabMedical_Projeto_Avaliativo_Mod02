@@ -5,13 +5,14 @@ import styled from 'styled-components';
 export const ToolBar = styled.div`
   display: flex;
   width: 100%;
-  height: 90px;
+  height: 120px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   top: 0;
   align-items: center;
   justify-content: end;
   background-color: #fff;
   background-color: #549ABB;
-
 `;
 
 export const UserIcon = styled.div`
