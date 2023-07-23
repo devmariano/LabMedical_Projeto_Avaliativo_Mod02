@@ -1,0 +1,45 @@
+{"patients":[
+    {
+      "nome": "João da Silva",
+      "idade": 30,
+      "contato": "joao.silva@example.com",
+      "planoSaude": "Plano A"
+    },
+    {
+      "nome": "Maria Souza",
+      "idade": 25,
+      "contato": "(11) 98765-4321",
+      "planoSaude": "Plano B"
+    },
+    {
+      "nome": "Mario Andrade",
+      "idade": 45,
+      "contato": "(11) 98765-4321",
+      "planoSaude": "Amil"
+    },
+    {
+      "nome": "Alex Andrade",
+      "idade": 15,
+      "contato": "(11) 98765-4345",
+      "planoSaude": "Unimed"
+    },
+    {
+      "nome": "Maria Souza",
+      "idade": 25,
+      "contato": "(11) 98765-4321",
+      "planoSaude": "Plano B"
+    },
+    {
+      "nome": "Mario Andrade",
+      "idade": 45,
+      "contato": "(11) 98765-4321",
+      "planoSaude": "Amil"
+    },
+    {
+      "nome": "Alex Andrade",
+      "idade": 15,
+      "contato": "(11) 98765-4345",
+      "planoSaude": "Unimed"
+    }
+  ]
+}

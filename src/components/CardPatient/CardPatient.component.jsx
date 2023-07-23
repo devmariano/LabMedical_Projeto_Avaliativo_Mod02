@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import * as Styled from './CardPatient.style';
@@ -20,6 +21,15 @@ const CardPatient = ({ paciente }) => {
       </Card.Body>
     </Styled.CardWrapper>
   );
+};
+
+CardPatient.propTypes = {
+  paciente: PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    idade: PropTypes.number.isRequired,
+    contato: PropTypes.string.isRequired,
+    planoSaude: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CardPatient;

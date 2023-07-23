@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useMenu } from "../../contexts/menu/menu.context";
 import CardStatus from "../../components/CardStatus/CardStatus";
 import { FaUser, FaStethoscope, FaFileMedical } from 'react-icons/fa';
@@ -7,58 +7,21 @@ import SearchBar from "../../components/searchBar/searchBar.component";
 import { Container, Row, Col } from 'react-bootstrap';
 import CardPatient from "../../components/CardPatient/CardPatient.component";
 
+import patientData from '../../data/patientData.json';
+
 export const HomePage = () => {
   const { setTittle } = useMenu();
+  const [searchValue, setSearchValue] = useState(""); // State para armazenar o search value
+  const [filteredPatients, setFilteredPatients] = useState([]); // State que armazena os array de pacientes filtrados
 
   useEffect(() => {
     setTittle('ESTATISTICAS E INFORMAÇÕES');
-  }, []);
-
-    // Array com informações fictícias de pacientes
-    const pacientes = [
-      {
-        nome: "João da Silva",
-        idade: 30,
-        contato: "joao.silva@example.com",
-        planoSaude: "Plano A"
-      },
-      {
-        nome: "Maria Souza",
-        idade: 25,
-        contato: "(11) 98765-4321",
-        planoSaude: "Plano B"
-      },
-      {
-        nome: "Mario Andrade",
-        idade: 45,
-        contato: "(11) 98765-4321",
-        planoSaude: "Amil"
-      },
-      {
-        nome: "Alex Andrade",
-        idade: 15,
-        contato: "(11) 98765-4345",
-        planoSaude: "Unimed"
-      },
-      {
-        nome: "Maria Souza",
-        idade: 25,
-        contato: "(11) 98765-4321",
-        planoSaude: "Plano B"
-      },
-      {
-        nome: "Mario Andrade",
-        idade: 45,
-        contato: "(11) 98765-4321",
-        planoSaude: "Amil"
-      },
-      {
-        nome: "Alex Andrade",
-        idade: 15,
-        contato: "(11) 98765-4345",
-        planoSaude: "Unimed"
-      },
-    ];
+    // Filtra pacientes com base no valor da busca 
+    const filteredPatients = patientData.patients.filter(paciente =>
+      paciente.nome.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredPatients(filteredPatients);
+  }, [searchValue, setTittle]);
 
   return (
     <Styled.Dasboard>
@@ -76,16 +39,18 @@ export const HomePage = () => {
           </Col>
         </Row>
         <Styled.Title>Informações Rápidas de Pacientes</Styled.Title>
-        <SearchBar />
+        <SearchBar setValorBuscado={setSearchValue} />
         <Row>
-          {pacientes.map((paciente, index) => (
+          {filteredPatients.map((paciente, index) => (
             <Col key={index} xs={12} sm={6} md={4} lg={3}>
               <CardPatient paciente={paciente} />
             </Col>
           ))}
         </Row>
-        </Container>
+      </Container>
     </Styled.Dasboard>
   )
 }
+
+
 
