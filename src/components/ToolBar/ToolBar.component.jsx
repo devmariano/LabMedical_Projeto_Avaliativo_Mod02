@@ -1,10 +1,13 @@
 
 import * as Styled from './Toolbar.style';
 import { useMenu } from "../../contexts/menu/menu.context";
+import { AuthContext } from '../../contexts/auth/auth.context';
+import { useContext } from 'react';
 
 
 export const ToolBar = () => {
     const { menuOpen, setMenuOpen, tittle } = useMenu();
+    const { auth } = useContext(AuthContext);
   
   return(
     <Styled.ToolBar>
@@ -15,7 +18,7 @@ export const ToolBar = () => {
     )}
     {/* <Styled.Title>{menuOpen ? "TITULO DA PAGINA" : "Menu"}</Styled.Title> */}
     <Styled.Title>{tittle}</Styled.Title>
-    <Styled.Name>NOME</Styled.Name>
+    <Styled.Name>{auth.name}</Styled.Name>
     <Styled.UserIcon>
       <img src="../../public/images/user1.png" alt="" />
     </Styled.UserIcon>

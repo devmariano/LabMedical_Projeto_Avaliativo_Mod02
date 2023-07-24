@@ -54,7 +54,7 @@ export const FormLoginComponent = () => {
   }
 
   const redirectToHome = (user) => {
-    setAuth({ user, isLogged: true });
+    setAuth({ user, isLogged: true, name: user.nome });
     navigate('/');
   }
 
