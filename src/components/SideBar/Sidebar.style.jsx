@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export const Sidebar = styled.div`
   width: ${({$open}) => $open ? '20%' : '0'};
   height: 100vh;
+  min-height: 100vh;
   max-width: 20rem;
   min-width: ${({$open}) => $open ? '15rem' : '0'};
   background-color: #549ABB;
