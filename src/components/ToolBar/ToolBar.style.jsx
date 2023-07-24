@@ -12,7 +12,7 @@ export const ToolBar = styled.div`
   align-items: center;
   justify-content: end;
   background-color: #fff;
-  background-color: #549ABB;
+  background-color: #145979;
 `;
 
 export const UserIcon = styled.div`
@@ -30,7 +30,7 @@ export const Title = styled.legend`
   color: #ffffff;
   font-size: 2rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
 `;
 
@@ -46,7 +46,7 @@ export const Name = styled.p`
 export const OpenButton = styled.button`
   display: flex;
   padding: 0.75rem .75rem;
-  background: #549ABB;
+  background: #145979;
   border: none;
   color: #ffffff; 
   font-size: 2rem;

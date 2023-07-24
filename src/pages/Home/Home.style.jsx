@@ -11,7 +11,7 @@ export const Dasboard = styled.div`
 `
 
 export const Title = styled.h3`
-  font-size: 2.7rem;
+  font-size: 2.5rem;
   color: #8d8d8d;
   margin-bottom: 2rem;
   padding-top: 3rem;

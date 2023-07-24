@@ -16,7 +16,7 @@ export const HomePage = () => {
   const totalPatients = PatientService.getPatients();
 
   useEffect(() => {
-    setTittle('ESTATISTICAS E INFORMAÇÕES');
+    setTittle('ESTATÍSTICAS E INFORMAÇÕES');
     // Busca os pacientes no serviço
     const patients = PatientService.getPatients();
     
