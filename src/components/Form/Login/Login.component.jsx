@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
 import { AuthContext } from '../../../contexts/auth/auth.context';
 import { InputComponent } from '../Input/Input.component';
 import * as Styled from './Login.style';
@@ -11,6 +9,7 @@ import { ModalComponent } from '../Modal/Modal.component';
 
 
 export const FormLoginComponent = () => {
+  const { handleLogin } = useContext(AuthContext);
 
   const {
     register,
@@ -21,7 +20,6 @@ export const FormLoginComponent = () => {
 
   const navigate = useNavigate();
 
-  const { setAuth } = useContext(AuthContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -49,14 +47,11 @@ export const FormLoginComponent = () => {
     }
 
     password === user.password
-      ? redirectToHome(user)
+      ? handleLogin(user)
       : alert('Ops! Usuário e/ou Senha Invalidos.');
+      navigate('/'); 
   }
 
-  const redirectToHome = (user) => {
-    setAuth({ user, isLogged: true, name: user.nome });
-    navigate('/');
-  }
 
   const openModal = () => {
     setIsModalOpen(true);

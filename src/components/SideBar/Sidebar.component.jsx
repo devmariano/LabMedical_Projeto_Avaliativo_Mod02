@@ -1,17 +1,23 @@
 import * as Styled from './Sidebar.style';
+import { useNavigate } from 'react-router-dom'; 
+import React, { useContext } from 'react';
+import { useMenu } from "../../contexts/menu/menu.context";
+import { AuthContext } from '../../contexts/auth/auth.context';
 import { FaAlignJustify } from 'react-icons/fa';
 import { FaChartBar } from 'react-icons/fa';
 import { GoSidebarExpand } from 'react-icons/go';
 import { ImExit } from 'react-icons/im';
 import { FaPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; 
-
-import { useMenu } from "../../contexts/menu/menu.context";
 
 export const SideBar = () => {
-const { menuOpen, setMenuOpen, tittle } = useMenu();
-  const navigate = useNavigate(); 
+const { menuOpen, setMenuOpen } = useMenu();
+const { handleLogout } = useContext(AuthContext);
+const navigate = useNavigate(); 
 
+const handleLogoutClick = () => {
+  handleLogout();
+  navigate('/login');
+};
 
   return (
 <Styled.Sidebar $open={menuOpen}>
@@ -23,9 +29,8 @@ const { menuOpen, setMenuOpen, tittle } = useMenu();
         }} $withIcon>
           <FaChartBar /> INICIO
         </Styled.Button>
-        <Styled.Button onClick={() => {
-          navigate('/sair');
-        }} $withIcon>
+        <Styled.Button onClick={handleLogoutClick} 
+        $withIcon>
           <ImExit /> SAIR
         </Styled.Button>
       </Styled.MenuGroup>
