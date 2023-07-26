@@ -43,3 +43,18 @@ export const Name = styled.p`
   font-weight: 600;
   line-height: normal;
 `;
+
+export const OpenButton = styled.button`
+  display: flex;
+  padding: 0.75rem .75rem;
+  background: #549ABB;
+  border: none;
+  color: #ffffff; 
+  font-size: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  
+  &:hover {
+    font-weight: 900;
+  }
+`;
