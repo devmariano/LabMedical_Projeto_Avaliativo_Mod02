@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal} from 'react-bootstrap';
 import { InputComponent } from '../Input/Input.component';
 import * as Styled from './Modal.style';
 
