@@ -110,7 +110,9 @@ export const FormLoginComponent = () => {
       <Styled.Button $active={ !errors.email && !errors.password } type='submit' disabled={ errors.email || errors.password }>Entrar</Styled.Button>
 
       <Styled.ActionBase>
+
         <Styled.EsqueciSenha type='button' onClick={lostPassword} >Esqueci minha senha</Styled.EsqueciSenha>
+
       </Styled.ActionBase>
 
     </Styled.Form>
