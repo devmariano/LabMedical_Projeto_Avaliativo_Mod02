@@ -8,7 +8,7 @@ import { useContext } from 'react';
 export const ToolBar = () => {
     const { menuOpen, setMenuOpen, tittle } = useMenu();
     const { auth } = useContext(AuthContext);
-  
+
   return(
     <Styled.ToolBar>
     {menuOpen === false && (
@@ -16,9 +16,9 @@ export const ToolBar = () => {
         &#9776;
       </Styled.OpenButton>
     )}
-    {/* <Styled.Title>{menuOpen ? "TITULO DA PAGINA" : "Menu"}</Styled.Title> */}
+
     <Styled.Title>{tittle}</Styled.Title>
-    <Styled.Name>{auth.name}</Styled.Name>
+    <Styled.Name>{auth.user.nome}</Styled.Name>
     <Styled.UserIcon>
       <img src="../../public/images/user1.png" alt="" />
     </Styled.UserIcon>
