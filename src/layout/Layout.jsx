@@ -4,6 +4,7 @@ import { useContext } from "react"
 
 import { SideBar } from '../components/SideBar/Sidebar.component';
 import { ToolBar } from '../components/ToolBar/ToolBar.Component';
+import { Footer } from '../components/Footer/Footer.component';
 
 
 import { AuthContext } from "../contexts/auth/auth.context";
@@ -32,6 +33,7 @@ const render = () => {
                 <Styled.Content>
                     <Outlet />
                 </Styled.Content>
+                <Footer/>
             </Styled.Main>
     </Styled.App>
     </MenuProvider>

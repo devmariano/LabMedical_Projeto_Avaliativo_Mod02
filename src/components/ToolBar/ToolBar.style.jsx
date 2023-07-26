@@ -5,25 +5,24 @@ import styled from 'styled-components';
 export const ToolBar = styled.div`
   display: flex;
   width: 100%;
-  height: 90px;
+  height: 120px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   top: 0;
   align-items: center;
   justify-content: end;
   background-color: #fff;
-  background-color: #549ABB;
-
+  background-color: #145979;
 `;
 
 export const UserIcon = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 55px;
+  height: 55px;
+  margin-left: 15px;
+  margin-right: 30px;
   display: flex;
   justify-content: center;
   border-radius: 50%;
-  overflow: hidden;
-
 `;
 
 export const Title = styled.legend`
@@ -31,7 +30,7 @@ export const Title = styled.legend`
   color: #ffffff;
   font-size: 2rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
 `;
 
@@ -47,7 +46,7 @@ export const Name = styled.p`
 export const OpenButton = styled.button`
   display: flex;
   padding: 0.75rem .75rem;
-  background: #549ABB;
+  background: #145979;
   border: none;
   color: #ffffff; 
   font-size: 2rem;

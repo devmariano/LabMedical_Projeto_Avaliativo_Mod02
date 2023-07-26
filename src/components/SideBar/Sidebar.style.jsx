@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 
 export const Sidebar = styled.div`
   width: ${({$open}) => $open ? '20%' : '0'};
-  height: 100%;
-  max-width: 16rem;
+  height: 100vh;
+  min-height: 100vh;
+  max-width: 20rem;
   min-width: ${({$open}) => $open ? '15rem' : '0'};
-  background-color: #549ABB;
+  background-color: #288c9d;
   padding-left: ${({$open}) => $open ? '0.625rem' : '0'};
   padding-right: ${({$open}) => $open ? '0.625rem' : '0'};
   `;
@@ -33,7 +34,7 @@ export const Button = styled.button`
   align-items: center;
   align-self: stretch;
   border-radius: 0.5rem;
-  background: #549ABB;
+  background: #288c9d;
   border: 1px solid #ffffffa7;
   color: #ffffff; 
   font-size: 0.85rem;
