@@ -9,6 +9,7 @@ import CardPatient from "../../components/CardPatient/CardPatient.component";
 import { PatientService } from "../../services/Patient/Patient.service";
 
 
+
 export const HomePage = () => {
   const { setTittle } = useMenu();
   const [searchValue, setSearchValue] = useState(""); // State para armazenar o search value
@@ -30,7 +31,35 @@ export const HomePage = () => {
     <Styled.Dasboard>
       <Container>
         <Styled.Title>Estatísticas do Sistema</Styled.Title>
-        <Row>
+        <div className="row">
+        <div className="col-md-4">
+          <CardStatus
+            title="Pacientes Cadastrados"
+            value={8}
+            icon={<FaUser />}
+            color="#36d2b1"
+          />
+        </div>
+
+        <div className="col-md-4">
+          <CardStatus
+            title="Consultas Cadastradas"
+            value={11}
+            icon={<FaStethoscope />}
+            color="#6674d2"
+          />
+        </div>
+
+        <div className="col-md-4">
+          <CardStatus
+            title="Exames Cadastrados"
+            value={12}
+            icon={<FaFileMedical />}
+            color="#e98b58"
+          />
+        </div>
+      </div>
+        {/* <Row>
           <Col>
             <CardStatus title="Pacientes Cadastrados" value={totalPatients.length} color='#36d2b1' icon={<FaUser />} />
           </Col>
@@ -40,7 +69,7 @@ export const HomePage = () => {
           <Col>
             <CardStatus title="Exames Cadastrados" value="75" color='#e98b58' icon={<FaFileMedical />} />
           </Col>
-        </Row>
+        </Row> */}
         <Styled.Title>Informações Rápidas de Pacientes</Styled.Title>
         <SearchBar setValorBuscado={setSearchValue} />
         <Row>
