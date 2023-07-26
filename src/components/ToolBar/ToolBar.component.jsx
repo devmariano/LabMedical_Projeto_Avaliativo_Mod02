@@ -20,7 +20,7 @@ export const ToolBar = () => {
     <Styled.Title>{tittle}</Styled.Title>
     <Styled.Name>{auth.user.nome}</Styled.Name>
     <Styled.UserIcon>
-      <img src="../../public/images/user1.png" alt="" />
+      <img src="/images/user1.png" alt="" />
     </Styled.UserIcon>
   </Styled.ToolBar>
   )

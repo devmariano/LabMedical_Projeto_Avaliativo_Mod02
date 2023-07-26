@@ -18,6 +18,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
     return value === password || 'As senhas não coincidem.';
   };
 
+  const isFormValid = Object.keys(errors).length === 0;
 
   return (
     <Modal show={show} onHide={onClose}>
@@ -27,7 +28,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
       <Modal.Body>
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.InputGroup>
-          <InputComponent
+            <InputComponent
               id='modalNome'
               type='text'
               placeholder='Digite seu nome'
@@ -35,7 +36,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               register={{
                 ...register('nome', {
                   required: true,
-                })
+                }),
               }}
               error={errors.nome}
             />
@@ -47,8 +48,8 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               register={{
                 ...register('email', {
                   required: true,
-                  validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) }
-                })
+                  validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) },
+                }),
               }}
               error={errors.email}
             />
@@ -61,7 +62,7 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               error={errors.password}
             />
             <InputComponent
-              id='modalConfirmPassword' // Adicione um novo campo para confirmação de senha
+              id='modalConfirmPassword'
               type='password'
               placeholder='Confirme sua senha'
               label='Confirme sua senha'
@@ -74,13 +75,15 @@ export const ModalComponent = ({ show, onClose, onSubmit }) => {
               }}
               error={errors.confirmPassword}
             />
-            
           </Styled.InputGroup>
 
-          <Styled.Button $active={!errors.email && !errors.password && !errors.confirmPassword} type='submit' disabled={errors.email || errors.password || errors.confirmPassword}>Criar</Styled.Button>
+          <Styled.Button $active={isFormValid} type='submit' disabled={!isFormValid}>
+            Criar
+          </Styled.Button>
 
-          <Styled.Button $outlined={true} type='button' onClick={onClose}>Voltar</Styled.Button>
-
+          <Styled.Button $outlined={true} type='button' onClick={onClose}>
+            Voltar
+          </Styled.Button>
         </Styled.Form>
       </Modal.Body>
     </Modal>

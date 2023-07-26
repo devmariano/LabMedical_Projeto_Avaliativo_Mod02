@@ -13,7 +13,6 @@ import { MedicalRecordPage } from './pages/MedicalRecord/MedicalRecord.page';
 import { PatientRegisterPage } from './pages/PatientRegister/PatientRegister.page';
 import { PatientRecordPage } from './pages/PatientRecord/PatientRecord.page';
 
-console.log(userData.users);
 
 if(!LocalStorageService.get('users')) {
   LocalStorageService.set('users', [...userData.users])

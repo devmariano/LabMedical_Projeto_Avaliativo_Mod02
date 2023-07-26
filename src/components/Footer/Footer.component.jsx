@@ -7,7 +7,7 @@ export const Footer = () => {
   return(
     <Styled.Footer>
         <Styled.FooterLeft>
-            <Styled.Logo src="../../public/images/lab365.png"/>
+            <Styled.Logo src="/images/lab365.png"/>
             <Styled.Title>Projeto Módulo 2 [Trindade]</Styled.Title>
             </Styled.FooterLeft>
     <Styled.FooterRight>
