@@ -1,4 +1,4 @@
-import {FormLoginComponent} from '../components/Form/Login/Login.component';
+import {FormLoginComponent} from '../../components/Form/Login/Login.component';
 import * as Styled from './Login.style';
 
 import { Container, Row, Col } from 'react-bootstrap'

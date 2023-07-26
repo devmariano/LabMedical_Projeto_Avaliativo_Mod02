@@ -37,12 +37,12 @@ const handleLogoutClick = () => {
       <Styled.MenuGroup>
         <Styled.Title>PACIENTES</Styled.Title>
         <Styled.Button onClick={() => {
-          navigate('/cadastrarusuario');
+          navigate('/patientregister');
         }} $withIcon>
           <FaPlus />CADASTRAR
         </Styled.Button>
         <Styled.Button onClick={() => {
-          navigate('/listarprontuario');
+          navigate('/medicalrecord');
         }} $withIcon>
           <FaAlignJustify /> LISTAR PRONTUÁRIO
         </Styled.Button>
@@ -50,12 +50,12 @@ const handleLogoutClick = () => {
       <Styled.MenuGroup>
         <Styled.Title>EXAMES</Styled.Title>
         <Styled.Button onClick={() => {
-          navigate('/cadastrarconsulta');
+          navigate('/appointment');
         }} $withIcon>
           <FaPlus /> CADASTRAR CONSULTA
         </Styled.Button>
         <Styled.Button onClick={() => {
-          navigate('/cadastrarexame');
+          navigate('/exam');
         }} $withIcon>
           <FaPlus /> CADASTRAR EXAME
         </Styled.Button>
