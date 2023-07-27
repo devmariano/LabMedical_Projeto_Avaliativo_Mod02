@@ -4,8 +4,20 @@ import { Card } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import * as Styled from './CardPatient.style';
 
+const calculateAge = (birthdate) => {
+  const birthdateObj = new Date(birthdate);
+  const today = new Date();
+  let age = today.getFullYear() - birthdateObj.getFullYear();
+  const monthDifference = today.getMonth() - birthdateObj.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdateObj.getDate())) {
+    age--;
+  }
+  return age;
+};
+
 const CardPatient = ({ paciente }) => {
-  const { nome, idade, contato, planoSaude } = paciente;
+  const { nome, dataNascimento, telefone, convenio } = paciente;
+  const idade = calculateAge(paciente.dataNascimento);
 
   return (
     <Styled.CardWrapper>
@@ -14,10 +26,10 @@ const CardPatient = ({ paciente }) => {
           <FaUser />
         </Styled.IconWrapper>
         <Styled.Name>{nome}</Styled.Name>
-        <Styled.Info>Idade: {idade}</Styled.Info>
-        <Styled.Info>{contato}</Styled.Info>
-        <Styled.Info>Plano de Saúde: {planoSaude}</Styled.Info>
-        <Styled.ButtonVerMais>Ver mais informações</Styled.ButtonVerMais>
+        <Styled.Info>{idade} Anos</Styled.Info>
+        <Styled.Info>{telefone}</Styled.Info>
+        <Styled.Info>{convenio}</Styled.Info>
+        <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
       </Card.Body>
     </Styled.CardWrapper>
   );
@@ -26,9 +38,9 @@ const CardPatient = ({ paciente }) => {
 CardPatient.propTypes = {
   paciente: PropTypes.shape({
     nome: PropTypes.string.isRequired,
-    idade: PropTypes.number.isRequired,
-    contato: PropTypes.string.isRequired,
-    planoSaude: PropTypes.string.isRequired,
+    idade: PropTypes.number,
+    telefone: PropTypes.string.isRequired,
+    convenio: PropTypes.string,
   }).isRequired,
 };
 

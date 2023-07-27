@@ -15,6 +15,7 @@ export const HomePage = () => {
   const [searchValue, setSearchValue] = useState(""); // State para armazenar o search value
   const [filteredPatients, setFilteredPatients] = useState([]); // State que armazena os array de pacientes filtrados
   const totalPatients = PatientService.getPatients();
+ 
 
   useEffect(() => {
     setTittle('ESTATÍSTICAS E INFORMAÇÕES');
@@ -35,7 +36,7 @@ export const HomePage = () => {
         <div className="col-md-4">
           <CardStatus
             title="Pacientes Cadastrados"
-            value={8}
+            value={totalPatients.length} 
             icon={<FaUser />}
             color="#36d2b1"
           />
