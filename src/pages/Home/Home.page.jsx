@@ -59,17 +59,6 @@ export const HomePage = () => {
           />
         </div>
       </div>
-        {/* <Row>
-          <Col>
-            <CardStatus title="Pacientes Cadastrados" value={totalPatients.length} color='#36d2b1' icon={<FaUser />} />
-          </Col>
-          <Col>
-            <CardStatus title="Consultas Cadastradas" value="50" color='#6674d2' icon={<FaStethoscope />} />
-          </Col>
-          <Col>
-            <CardStatus title="Exames Cadastrados" value="75" color='#e98b58' icon={<FaFileMedical />} />
-          </Col>
-        </Row> */}
         <Styled.Title>Informações Rápidas de Pacientes</Styled.Title>
         <SearchBar setValorBuscado={setSearchValue} />
         <Row>
