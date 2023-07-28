@@ -21,5 +21,5 @@ export const Content = styled.div`
   color: #666;
   flex: 1;
   width: 100%;
-  padding-bottom: 3rem;
+
 `;

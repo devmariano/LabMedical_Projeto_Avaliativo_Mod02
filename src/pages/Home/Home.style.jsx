@@ -8,6 +8,7 @@ export const Dasboard = styled.div`
   justify-content:space-between;
   background-color: #fff;
   flex: 1;
+  padding-bottom: 3rem;
 `
 
 export const Title = styled.h3`

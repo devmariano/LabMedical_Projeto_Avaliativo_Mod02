@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FormContainer } from './PatientRegisterForm.styled';
+import { set, useForm } from 'react-hook-form';
+import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel,EqualDivider,Child } from './PatientRegisterForm.styled';
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
 import LoadingSpinner from '../Loading/LoadingSpinner.component';
@@ -10,20 +10,21 @@ import LoadingSpinner from '../Loading/LoadingSpinner.component';
 const PatientRegisterForm = () => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const [loading, setLoading] = useState(false); // Estado para controlar a exibição do spinner
-
+    const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento 
+    
 
     const onSubmit = (data) => {
         setLoading(true); // Ativa o spinner
         try {
             // Lógica para salvar os dados no LocalStorage
             const newPatient = PatientService.createPatient(data);
-            console.log('New Patient:', newPatient);
         } catch (error) {
             console.error(error.message);
         } finally {                       // Atraso de 2 segundos antes de desativar o spinner
             setTimeout(() => {
-            setLoading(false); // Desativa o spinner após 2 segundos
-          }, 3000);
+            setLoading(false);// Desativa o spinner após 2 segundos
+            setIsSaved(true); //altera o state do salved
+          }, 1500);
         }
 
     };
@@ -45,10 +46,14 @@ const PatientRegisterForm = () => {
     };
 
     return (
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <> 
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <EqualDivider><StyledLabel $tittle>DADOS PESSOAIS:</StyledLabel></EqualDivider>
+        <EqualDivider>
+            <Child>
             {/* Nome Completo */}
-            <label>Nome Completo:</label>
-            <input
+            <StyledLabel>Nome Completo:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('nome', {
                     required: 'Campo obrigatório',
@@ -62,31 +67,33 @@ const PatientRegisterForm = () => {
                     },
                 })}
             />
-            {errors.nome && <span>{errors.nome.message}</span>}
-
+            {errors.nome && <StyledAlert>{errors.nome.message}</StyledAlert>}
+            </Child><Child>
             {/* Gênero */}
-            <label>Gênero:</label>
-            <select {...register('genero', { required: 'Campo obrigatório' })}>
+            <StyledLabel>Gênero:</StyledLabel>
+            <StyledSelect {...register('genero', { required: 'Campo obrigatório' })}>
                 <option value="">Selecione...</option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
                 <option value="outro">Outro</option>
                 <option value="nao_binario">Não-Binário</option>
                 <option value="prefiro_nao_informar">Prefiro não informar</option>
-            </select>
-            {errors.genero && <span>{errors.genero.message}</span>}
-
+            </StyledSelect>
+            {errors.genero && <StyledAlert>{errors.genero.message}</StyledAlert>}
+            </Child><Child>
             {/* Data de Nascimento */}
-            <label>Data de Nascimento:</label>
-            <input
+            <StyledLabel>Data de Nascimento:</StyledLabel>
+            <StyledInput
                 type="date"
                 {...register('dataNascimento', { required: 'Campo obrigatório' })}
             />
-            {errors.dataNascimento && <span>{errors.dataNascimento.message}</span>}
-
+            {errors.dataNascimento && <StyledAlert>{errors.dataNascimento.message}</StyledAlert>}
+            </Child>
+            </EqualDivider><EqualDivider>
             {/* CPF */}
-            <label>CPF:</label>
-            <input
+            <Child>
+            <StyledLabel>CPF:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('cpf', {
                     required: 'Campo obrigatório',
@@ -97,10 +104,10 @@ const PatientRegisterForm = () => {
                 })}
             />
             {errors.cpf && <span>{errors.cpf.message}</span>}
-
+            </Child><Child>
             {/* RG com órgão expedidor */}
-            <label>RG com órgão expedidor:</label>
-            <input
+            <StyledLabel>RG com órgão expedidor:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('rg', {
                     required: 'Campo obrigatório',
@@ -111,10 +118,10 @@ const PatientRegisterForm = () => {
                 })}
             />
             {errors.rg && <span>{errors.rg.message}</span>}
-
+            </Child><Child>
             {/* Estado Civil */}
-            <label>Estado Civil:</label>
-            <select {...register('estadoCivil', { required: 'Campo obrigatório' })}>
+            <StyledLabel>Estado Civil:</StyledLabel>
+            <StyledSelect {...register('estadoCivil', { required: 'Campo obrigatório' })}>
                 <option value="">Selecione...</option>
                 <option value="solteiro">Solteiro(a)</option>
                 <option value="casado">Casado(a)</option>
@@ -122,12 +129,14 @@ const PatientRegisterForm = () => {
                 <option value="divorciado">Divorciado(a)</option>
                 <option value="viuvo">Viúvo(a)</option>
                 <option value="outro">Outro</option>
-            </select>
-            {errors.estadoCivil && <span>{errors.estadoCivil.message}</span>}
-
+            </StyledSelect>
+            {errors.estadoCivil && <StyledAlert>{errors.estadoCivil.message}</StyledAlert>}
+            </Child>
+            </EqualDivider><EqualDivider>
+            <Child>
             {/* Telefone */}
-            <label>Telefone:</label>
-            <input
+            <StyledLabel>Telefone:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('telefone', {
                     required: 'Campo obrigatório',
@@ -137,11 +146,11 @@ const PatientRegisterForm = () => {
                     },
                 })}
             />
-            {errors.telefone && <span>{errors.telefone.message}</span>}
-
+            {errors.telefone && <StyledAlert>{errors.telefone.message}</StyledAlert>}
+            </Child><Child>
             {/* E-mail */}
-            <label>E-mail:</label>
-            <input
+            <StyledLabel>E-mail:</StyledLabel>
+            <StyledInput
                 type="email"
                 {...register('email', {
                     pattern: {
@@ -151,10 +160,10 @@ const PatientRegisterForm = () => {
                 })}
             />
             {errors.email && <span>{errors.email.message}</span>}
-
+            </Child><Child>
             {/* Contato de Emergência */}
-            <label>Contato de Emergência:</label>
-            <input
+            <StyledLabel>Contato de Emergência:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('contatoEmergencia', {
                     required: 'Campo obrigatório',
@@ -164,47 +173,56 @@ const PatientRegisterForm = () => {
                     },
                 })}
             />
-            {errors.contatoEmergencia && <span>{errors.contatoEmergencia.message}</span>}
-
+            {errors.contatoEmergencia && <StyledAlert>{errors.contatoEmergencia.message}</StyledAlert>}
+            </Child>
+            </EqualDivider>
+            <EqualDivider><StyledLabel $tittle>DADOS MÉDICOS:</StyledLabel>
+            </EqualDivider><EqualDivider>
+            <Child>
             {/* Lista de Alergias */}
-            <label>Lista de Alergias:</label>
-            <input
+            <StyledLabel>Lista de Alergias:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('alergias')}
             />
-
             {/* Lista de Cuidados Específicos */}
-            <label>Lista de Cuidados Específicos:</label>
-            <input
+            <StyledLabel>Lista de Cuidados Específicos:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('cuidadosEspeciais')}
             />
-
+            </Child>
+            </EqualDivider><EqualDivider>
+            <Child>
             {/* Convênio */}
-            <label>Convênio:</label>
-            <input
+            <StyledLabel>Convênio:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('convenio')}
             />
-
+            </Child><Child>
             {/* Numero Convenio */}
-            <label>Numero do convênio:</label>
-            <input
+            <StyledLabel>Numero do convênio:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('numeroConvenio')}
             />
-
+            </Child><Child>
             {/* validade Convenio */}
-            <label>Validade do convênio:</label>
-            <input
+            <StyledLabel>Validade do convênio:</StyledLabel>
+            <StyledInput
                 type="date"
                 {...register('validadeConvenio')}
             />
-
-
+            </Child>
+            </EqualDivider>
+            <EqualDivider><StyledLabel $tittle>ENDEREÇO:</StyledLabel>
+            </EqualDivider>
+            <EqualDivider>  
             {/* Campo para inserir o CEP */}
-            <label>CEP:</label>
-            <input
+            <Child>
+            <StyledLabel>CEP:</StyledLabel>
+            <StyledInput
                 type="text"
                 {...register('cep', {
                     required: 'Campo obrigatório',
@@ -215,24 +233,30 @@ const PatientRegisterForm = () => {
                 })}
                 onChange={handleCepChange} // Chama a função de busca de endereço quando o campo perder o foco
             />
-            {errors.cep && <span>{errors.cep.message}</span>}
-
+            {errors.cep && <StyledAlert>{errors.cep.message}</StyledAlert>}
             {/* Campos de endereço preenchidos automaticamente */}
-            <label>Logradouro:</label>
-            <input type="text" {...register('logradouro')} />
-            <label>Numero:</label>
-            <input type="text" {...register('numero')} />
-            <label>Bairro:</label>
-            <input type="text" {...register('bairro')} />
-            <label>Cidade:</label>
-            <input type="text" {...register('cidade')} />
-            <label>Estado:</label>
-            <input type="text" {...register('estado')} />
-
+            <StyledLabel>Logradouro:</StyledLabel>
+            <StyledInput type="text" {...register('logradouro')} />
+            <StyledLabel>Numero:</StyledLabel>
+            <StyledInput type="text" {...register('numero')} />
+            </Child><Child>
+            <StyledLabel>Bairro:</StyledLabel>
+            <StyledInput type="text" {...register('bairro')} />
+            <StyledLabel>Cidade:</StyledLabel>
+            <StyledInput type="text" {...register('cidade')} />
+            <StyledLabel>Estado:</StyledLabel>
+            <StyledInput type="text" {...register('estado')} />
+            </Child>
+            </EqualDivider><EqualDivider>
+            <Child>
+            {isSaved==true && <div style={{ color: 'green' }}>Salvo com sucesso!</div>}
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
+            </Child>
+            <StyledButton type="submit">Salvar</StyledButton>
 
-            <button type="submit">Salvar</button>
-        </FormContainer>
+            </EqualDivider>
+        </StyledForm>
+        </>
     );
 };
 
