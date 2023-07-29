@@ -31,20 +31,16 @@ export const StyledSelect = styled.select`
 `
 
 export const StyledButton = styled.button`
+  width: 45%;
   background-color: ${props => !props.$delete ? '#56ab58' : '#c95555'}; 
   color: white;
   padding: 10px;
   margin-top: 10px;
+  margin-left: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  &:disabled {
-    opacity: 0.5;
-  }
-  &:enabled {
-    opacity: 1.0;
-  }
-  opacity: ${props => !props.enabled ? 0.5 : 1};
+  opacity: ${props => props.$disabled ? 0.5 : 1};
 `
 
 export const StyledAlert = styled.div`

@@ -1,53 +1,144 @@
-import React from 'react';
-import { useState } from 'react';
-import { set, useForm } from 'react-hook-form';
-import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel,EqualDivider,Child } from './PatientRegisterForm.styled';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel, EqualDivider, Child } from './PatientRegisterForm.styled';
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
 import LoadingSpinner from '../Loading/LoadingSpinner.component';
 
+const PatientRegisterForm = ({ isEditing = false }) => {
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const [loading, setLoading] = useState(false); // Estado para controlar a exibição do spinner
+  const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento
+  const [isDeleted, setIsDeleted] = useState(false); // controla se aj foi deletado
 
-const PatientRegisterForm = () => {
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-    const [loading, setLoading] = useState(false); // Estado para controlar a exibição do spinner
-    const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento 
-    
+  const { id } = useParams(); // Get the id parameter from the URL
+  const parsedId = parseInt(id, 10);
 
-    const onSubmit = (data) => {
-        setLoading(true); // Ativa o spinner
-        try {
-            // Lógica para salvar os dados no LocalStorage
-            const newPatient = PatientService.createPatient(data);
-        } catch (error) {
-            console.error(error.message);
-        } finally {                       // Atraso de 2 segundos antes de desativar o spinner
-            setTimeout(() => {
-            setLoading(false);// Desativa o spinner após 2 segundos
-            setIsSaved(true); //altera o state do salved
-          }, 1500);
-        }
+  useEffect(() => {
+    if (isEditing && parsedId) {
+      // Fetch patient data using the id
+      const patientData = PatientService.getPatientById(parsedId);
+      // Check if patientData is not undefined before populating the form fields
+      if (patientData) {
+        setValue('nome', patientData.nome);
+        setValue('genero', patientData.genero);
+        setValue('dataNascimento', patientData.dataNascimento);
+        setValue('cpf', patientData.cpf);
+        setValue('rg', patientData.rg);
+        setValue('estadoCivil', patientData.estadoCivil);
+        setValue('telefone', patientData.telefone);
+        setValue('email', patientData.email);
+        setValue('contatoEmergencia', patientData.contatoEmergencia);
+        setValue('alergias', patientData.alergias);
+        setValue('cuidadosEspeciais', patientData.cuidadosEspeciais);
+        setValue('convenio', patientData.convenio);
+        setValue('numeroConvenio', patientData.numeroConvenio);
+        setValue('validadeConvenio', patientData.validadeConvenio);
+        setValue('cep', patientData.cep);
+        setValue('logradouro', patientData.logradouro);
+        setValue('numero', patientData.numero);
+        setValue('bairro', patientData.bairro);
+        setValue('cidade', patientData.cidade);
+        setValue('estado', patientData.estado);
+      } else {
+        console.error(`Patient with ID ${id} not found.`);
+        // Handle the case when the patient data is not found (e.g., redirect to an error page)
+      }
+    }
+  }, [isEditing, parsedId, setValue]);
 
-    };
+  const onSubmit = (data) => {
+    setLoading(true); // Ativa o spinner
+    try {
+      // Lógica para salvar os dados no LocalStorage
+      if (isEditing) {
+        PatientService.updatePatient(parsedId, data);
+      } else {
+        PatientService.createPatient(data);
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      // Atraso de 2 segundos antes de desativar o spinner
+      setTimeout(() => {
+        setLoading(false); // Desativa o spinner após 2 segundos
+        setIsSaved(true); //altera o state do salved
+      }, 1500);
+    }
+  };
 
-    const handleCepChange = async (event) => {
-        const cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        if (cep.length === 8) {
-            try {
-                const addressInfo = await getAddressInfo(cep);
-                alert(addressInfo.logradouro);
-                setValue('logradouro', addressInfo.logradouro);
-                setValue('bairro', addressInfo.bairro);
-                setValue('cidade', addressInfo.cidade);
-                setValue('estado', addressInfo.estado);
-            } catch (error) {
-                console.error(error.message);
-            }
-        }
-    };
+  
+  const handleDeletePatient = () => {
+    setLoading(true); // Ativa o spinner
+    try {
+      PatientService.deletePatient(parsedId);
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      // Atraso de 2 segundos antes de desativar o spinner
+      setTimeout(() => {
+        setLoading(false); // Desativa o spinner após 2 segundos
+        setValue('nome', "");
+        setValue('genero', "");
+        setValue('dataNascimento', "");
+        setValue('cpf', "");
+        setValue('rg', "");
+        setValue('estadoCivil', "");
+        setValue('telefone', "");
+        setValue('email', "");
+        setValue('contatoEmergencia', "");
+        setValue('alergias', "");
+        setValue('cuidadosEspeciais', "");
+        setValue('convenio', "");
+        setValue('numeroConvenio', "");
+        setValue('validadeConvenio', "");
+        setValue('cep', "");
+        setValue('logradouro', "");
+        setValue('numero', "");
+        setValue('bairro', "");
+        setValue('cidade', "");
+        setValue('estado', "");
+        setIsDeleted(true); 
+      }, 1500);
+    }
+  };
+
+  const handleCepChange = async (event) => {
+    const cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cep.length === 8) {
+      try {
+        const addressInfo = await getAddressInfo(cep);
+        alert(addressInfo.logradouro);
+        setValue('logradouro', addressInfo.logradouro);
+        setValue('bairro', addressInfo.bairro);
+        setValue('cidade', addressInfo.cidade);
+        setValue('estado', addressInfo.estado);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  };
 
     return (
         <> 
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <EqualDivider>
+          <Child>
+            <h3>{isEditing ? 'Atualização de cadastro' : ''}</h3>
+          </Child>
+          <Child>
+          {isDeleted == true && <div style={{ color: 'red' }}>Paciente deletado com sucesso!</div>}
+          {isSaved == true && <div style={{ color: 'green' }}>Salvo com sucesso!</div>}
+            {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
+          </Child>
+          {isEditing && (
+            <Child>
+              {isDeleted ? <StyledButton type="submit" disabled='true' $disabled >Salvar alterações</StyledButton>  : <StyledButton type="submit" >Salvar alterações</StyledButton>}
+              {isDeleted ? <StyledButton type="button" $delete $disabled disabled='true' onClick={handleDeletePatient}>Deletar</StyledButton>  : <StyledButton type="button" $delete  onClick={handleDeletePatient}>Deletar</StyledButton>}
+            </Child>
+          )}
+        </EqualDivider>
         <EqualDivider><StyledLabel $tittle>DADOS PESSOAIS:</StyledLabel></EqualDivider>
         <EqualDivider>
             <Child>
@@ -103,7 +194,7 @@ const PatientRegisterForm = () => {
                     },
                 })}
             />
-            {errors.cpf && <span>{errors.cpf.message}</span>}
+            {errors.cpf && <StyledAlert>{errors.cpf.message}</StyledAlert>}
             </Child><Child>
             {/* RG com órgão expedidor */}
             <StyledLabel>RG com órgão expedidor:</StyledLabel>
@@ -247,14 +338,16 @@ const PatientRegisterForm = () => {
             <StyledLabel>Estado:</StyledLabel>
             <StyledInput type="text" {...register('estado')} />
             </Child>
-            </EqualDivider><EqualDivider>
+            </EqualDivider>
+            {!isEditing ?
+            <EqualDivider>
             <Child>
             {isSaved==true && <div style={{ color: 'green' }}>Salvo com sucesso!</div>}
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
             </Child>
             <StyledButton type="submit">Salvar</StyledButton>
-
             </EqualDivider>
+            : ''}
         </StyledForm>
         </>
     );
