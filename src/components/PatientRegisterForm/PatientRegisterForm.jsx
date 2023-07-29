@@ -6,6 +6,8 @@ import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, Style
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
 import LoadingSpinner from '../Loading/LoadingSpinner.component';
+import { useNavigate } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 
 const PatientRegisterForm = ({ isEditing = false }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -13,11 +15,40 @@ const PatientRegisterForm = ({ isEditing = false }) => {
   const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento
   const [isDeleted, setIsDeleted] = useState(false); // controla se aj foi deletado
 
+  const navigate = useNavigate();
+
+
   const { id } = useParams(); // Get the id parameter from the URL
   const parsedId = parseInt(id, 10);
 
   useEffect(() => {
+    if (!isEditing ) {
+        setValue('nome', "");
+        setValue('genero', "");
+        setValue('dataNascimento', "");
+        setValue('cpf', "");
+        setValue('rg', "");
+        setValue('estadoCivil', "");
+        setValue('naturalidade', "");
+        setValue('telefone', "");
+        setValue('email', "");
+        setValue('contatoEmergencia', "");
+        setValue('alergias', "");
+        setValue('cuidadosEspeciais', "");
+        setValue('convenio', "");
+        setValue('numeroConvenio', "");
+        setValue('validadeConvenio', "");
+        setValue('cep', "");
+        setValue('logradouro', "");
+        setValue('numero', "");
+        setValue('bairro', "");
+        setValue('cidade', "");
+        setValue('estado', "");
+        setValue('complemento', "");
+        setValue('referencia', "");
+    }
     if (isEditing && parsedId) {
+    scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuart' });
       // Fetch patient data using the id
       const patientData = PatientService.getPatientById(parsedId);
       // Check if patientData is not undefined before populating the form fields
@@ -46,7 +77,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('complemento', patientData.complemento);
         setValue('referencia', patientData.referencia);
       } else {
-        console.error(`Patient with ID ${id} not found.`);
+        console.error(`Paciente com ID ${id} não encontrado.`);
         // Handle the case when the patient data is not found (e.g., redirect to an error page)
       }
     }
@@ -68,6 +99,11 @@ const PatientRegisterForm = ({ isEditing = false }) => {
       setTimeout(() => {
         setLoading(false); // Desativa o spinner após 2 segundos
         setIsSaved(true); //altera o state do salved
+        if (!isEditing) {
+            alert(PatientService.getLastId());
+            // Redirecionar para a página de edição do paciente, passando o id como parâmetro na URL // Obtenha o id do paciente recém-criado (por exemplo, usando o retorno da função de criação do serviço)
+            navigate(`/edit-patient/${PatientService.getLastId()}`);
+          }
       }, 1500);
     }
   };
@@ -129,20 +165,22 @@ const PatientRegisterForm = ({ isEditing = false }) => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const handleSwitchChange = (event) => {
+    setIsSaved(false)
     setIsSwitchOn(event.target.checked); // Atualiza o estado quando o switch é clicado
   };
+
+  
 
     return (
         <> 
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <EqualDivider>
           <Child>
-            <h3>{isEditing ? 'Atualização de cadastro' : ''}</h3>
+          {isDeleted == true && <div style={{ color: '#f17979' }}><h5>Removido com sucesso!</h5></div>}
+          {isSaved && isEditing && !isDeleted == true && <div style={{ color: '#6ac04e' }}><h5>Registrado com sucesso!</h5></div>}
+            {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
           </Child>
           <Child>
-          {isDeleted == true && <div style={{ color: '#f17979' }}><h5>Paciente deletado com sucesso!</h5></div>}
-          {isSaved && isEditing && !isDeleted == true && <div style={{ color: '#6ac04e' }}><h5>Paciente atualizado com sucesso!</h5></div>}
-            {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
           </Child>
           {isEditing && (
             <Child>   
@@ -386,10 +424,9 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {!isEditing ?
             <EqualDivider>
             <Child>
-            {isSaved==true && <div style={{ color: '#6ac04e' }}><h5>Salvo com sucesso!</h5></div>}
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
             </Child>
-            {isSaved==true ? <StyledButton type="submit" $disabled disabled>Salvar</StyledButton> : <StyledButton type="submit" >Salvar</StyledButton>}
+            <StyledButton type="submit" >Salvar</StyledButton>
             </EqualDivider>
             : ''}
         </StyledForm>

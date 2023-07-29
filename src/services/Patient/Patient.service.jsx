@@ -2,6 +2,12 @@ import { LocalStorageService } from "../LocalStorage.service";
 
 const patientsList = 'patients';
 
+const getLastId = () => {
+  const patients = getPatients();
+  const id = patients.length;
+  return id;
+}
+
 const getPatients = () => {
   return LocalStorageService.get(patientsList) || [];
 };
@@ -19,7 +25,6 @@ const createPatient = (data) => {
   };
 
   savePatients([...patients, newPatient]);
-
   return newPatient;
 };
 
@@ -45,6 +50,7 @@ const getPatientById = (id) => {
 };
 
 export const PatientService = {
+  getLastId,
   getPatients,
   createPatient,
   updatePatient,
