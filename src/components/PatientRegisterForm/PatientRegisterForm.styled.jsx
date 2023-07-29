@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 export const StyledForm = styled.form`
   width: 100%;
@@ -76,4 +77,7 @@ padding: 0.25rem 0.5rem;
 `;
 
 
+EqualDivider.propTypes = {$vertical: PropTypes.bool}
+StyledButton.propTypes = {$delete: PropTypes.string, $disabled: PropTypes.string }
+StyledLabel.propTypes = {$tittle: PropTypes.bool }
 
