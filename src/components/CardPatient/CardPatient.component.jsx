@@ -16,9 +16,9 @@ const calculateAge = (birthdate) => {
   return age;
 };
 
-const CardPatient = ({ paciente }) => {
-  const { nome, dataNascimento, telefone, convenio } = paciente;
-  const idade = calculateAge(paciente.dataNascimento);
+const CardPatient = ({ patient }) => {
+  const { nome, dataNascimento, telefone, convenio } = patient;
+  const idade = calculateAge(patient.dataNascimento);
 
   return (
     <Styled.CardWrapper>
@@ -30,7 +30,7 @@ const CardPatient = ({ paciente }) => {
         <Styled.Info>{idade} Anos</Styled.Info>
         <Styled.Info>{telefone}</Styled.Info>
         {convenio ? <Styled.Info style={{ color: '#5fa361' }}>{convenio}</Styled.Info> : <Styled.Info style={{ color: '#f66e6e' }}>Sem Plano</Styled.Info> }
-        <Link to={`/edit-patient/${paciente.id}`}>
+        <Link to={`/edit-patient/${patient.id}`}>
           <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
         </Link>
       </Card.Body>
@@ -39,7 +39,7 @@ const CardPatient = ({ paciente }) => {
 };
 
 CardPatient.propTypes = {
-  paciente: PropTypes.shape({
+  patient: PropTypes.shape({
     nome: PropTypes.string.isRequired,
     idade: PropTypes.number,
     telefone: PropTypes.string.isRequired,

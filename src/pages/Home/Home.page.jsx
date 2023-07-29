@@ -61,11 +61,11 @@ export const HomePage = () => {
         </div>
       </div>
         <Styled.Title>Informações Rápidas de Pacientes</Styled.Title>
-        <SearchBar setValorBuscado={setSearchValue} />
+        <SearchBar setSearchValue={setSearchValue} />
         <Row>
           {filteredPatients.map((patient, index) => (
             <Col key={index} xs={12} sm={6} md={4} lg={3}>
-              <CardPatient paciente={patient} />
+              <CardPatient patient={patient} />
             </Col>
           ))}
         </Row>
