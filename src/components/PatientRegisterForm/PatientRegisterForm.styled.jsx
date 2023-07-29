@@ -78,6 +78,6 @@ padding: 0.25rem 0.5rem;
 
 
 EqualDivider.propTypes = {$vertical: PropTypes.bool}
-StyledButton.propTypes = {$delete: PropTypes.string, $disabled: PropTypes.string }
+StyledButton.propTypes = {$delete: PropTypes.bool, $disabled: PropTypes.bool }
 StyledLabel.propTypes = {$tittle: PropTypes.bool }
 

@@ -140,8 +140,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <h3>{isEditing ? 'Atualização de cadastro' : ''}</h3>
           </Child>
           <Child>
-          {isDeleted == true && <div style={{ color: 'red' }}>Paciente deletado com sucesso!</div>}
-          {isSaved == true && <div style={{ color: 'green' }}>Salvo com sucesso!</div>}
+          {isDeleted == true && <div style={{ color: '#f17979' }}><h5>Paciente deletado com sucesso!</h5></div>}
+          {isSaved && isEditing && !isDeleted == true && <div style={{ color: '#6ac04e' }}><h5>Paciente atualizado com sucesso!</h5></div>}
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
           </Child>
           {isEditing && (
@@ -386,10 +386,10 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {!isEditing ?
             <EqualDivider>
             <Child>
-            {isSaved==true && <div style={{ color: 'green' }}>Salvo com sucesso!</div>}
+            {isSaved==true && <div style={{ color: '#6ac04e' }}><h5>Salvo com sucesso!</h5></div>}
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
             </Child>
-            <StyledButton type="submit">Salvar</StyledButton>
+            {isSaved==true ? <StyledButton type="submit" $disabled disabled>Salvar</StyledButton> : <StyledButton type="submit" >Salvar</StyledButton>}
             </EqualDivider>
             : ''}
         </StyledForm>

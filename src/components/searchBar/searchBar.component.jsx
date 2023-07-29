@@ -11,7 +11,7 @@ const SearchBar = ({ setSearchValue }) => {
       <CustomFormControl
         className='border-3'
         type='text'
-        placeholder='Digite o nome do paciente'
+        placeholder='Digite o nome, telefone ou email do paciente'
         onChange={(e) => setSearchValue(e.target.value)}
       />
     </InputGroup>

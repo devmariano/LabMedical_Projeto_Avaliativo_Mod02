@@ -22,10 +22,22 @@ export const HomePage = () => {
     // Busca os pacientes no serviço
     const patients = PatientService.getPatients();
     
-    // Filtra os pacientes com base no valor da busca
-    const filtered = patients.filter(patient => patient.nome.toLowerCase().includes(searchValue.toLowerCase()));
-    setFilteredPatients(filtered);
-  }, [searchValue, setTittle]);
+  // Filtra os pacientes com base no valor da busca
+  const filtered = patients.filter((patient) => {
+    const lowerCaseSearchValue = searchValue.toLowerCase();
+    const lowerCaseNome = patient.nome.toLowerCase();
+    const lowerCaseTelefone = patient.telefone.toLowerCase();
+    const lowerCaseEmail = patient.email.toLowerCase();
+    
+    return (
+      lowerCaseNome.includes(lowerCaseSearchValue) ||
+      lowerCaseTelefone.includes(lowerCaseSearchValue) ||
+      lowerCaseEmail.includes(lowerCaseSearchValue)
+    );
+  });
+
+  setFilteredPatients(filtered);
+}, [searchValue, setTittle]);
 
 
   return (
