@@ -29,7 +29,7 @@ const CardPatient = ({ paciente }) => {
         <Styled.Name>{nome}</Styled.Name>
         <Styled.Info>{idade} Anos</Styled.Info>
         <Styled.Info>{telefone}</Styled.Info>
-        <Styled.Info>{convenio}</Styled.Info>
+        {convenio ? <Styled.Info style={{ color: '#5fa361' }}>{convenio}</Styled.Info> : <Styled.Info style={{ color: '#f66e6e' }}>Sem Plano</Styled.Info> }
         <Link to={`/edit-patient/${paciente.id}`}>
           <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
         </Link>

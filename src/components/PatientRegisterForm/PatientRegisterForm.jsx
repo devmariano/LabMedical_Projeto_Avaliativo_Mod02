@@ -149,7 +149,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <h5>Ativar edição do paciente</h5>
             <Form.Switch
             id="custom-switch"
-            label="desativado/ativado"
+            label={isSwitchOn ? "DESATIVAR" :  "ATIVAR"}
             checked={isSwitchOn}
             onChange={handleSwitchChange}/>
               {isSwitchOn && (<>
