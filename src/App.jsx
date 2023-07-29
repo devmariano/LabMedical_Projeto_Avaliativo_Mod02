@@ -32,6 +32,7 @@ function App() {
           <Route path='/exam' element={<ExamPage/>}/>
           <Route path='/medicalrecord' element={<MedicalRecordPage/>}/>
           <Route path='/patientregister' element={<PatientRegisterPage/>}/>
+          <Route path='/edit-patient/:id' element={<PatientRegisterPage/>}/>
           <Route path='/patientrecord' element={<PatientRecordPage/>}/>
         </Route>
         <Route path='/login' element={<LoginPage/>}/>

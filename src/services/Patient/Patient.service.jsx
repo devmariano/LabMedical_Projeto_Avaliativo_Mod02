@@ -13,12 +13,14 @@ const savePatients = (patients) => {
 const createPatient = (data) => {
   const patients = getPatients();
 
-  data = {
+  const newPatient = {
     id: patients.length + 1,
     ...data,
   };
 
-  savePatients([...patients, data]);
+  savePatients([...patients, newPatient]);
+
+  return newPatient;
 };
 
 const updatePatient = (id, data) => {
@@ -37,10 +39,16 @@ const deletePatient = (id) => {
   savePatients(updatedPatients);
 };
 
+const getPatientById = (id) => {
+  const patients = getPatients();
+  return patients.find((patient) => patient.id === id);
+};
+
 export const PatientService = {
   getPatients,
   createPatient,
   updatePatient,
   deletePatient,
+  getPatientById,
 };
 

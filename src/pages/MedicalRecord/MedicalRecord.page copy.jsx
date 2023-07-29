@@ -3,7 +3,6 @@ import * as Styled from './MedicalRecord.style';
 import { useMenu } from "../../contexts/menu/menu.context";
 import PatientRegisterForm from '../../components/PatientRegisterForm/PatientRegisterForm';
 import { PatientService } from '../../services/Patient/Patient.service';
-import { Link } from 'react-router-dom';
 
 export const MedicalRecordPage = () => {
   const { setTittle } = useMenu();
@@ -47,11 +46,6 @@ export const MedicalRecordPage = () => {
                 <td>{patient.genero}</td>
                 <td>{patient.dataNascimento}</td>
                 <td>
-                  {/* Edit button */}
-                  <Link to={`/edit-patient/${patient.id}`}>
-                    <Styled.EditButton>Edit</Styled.EditButton>
-                  </Link>
-                  {/* Delete button */}
                   <Styled.DeleteButton onClick={() => handleDeletePatient(patient.id)}>
                     Delete
                   </Styled.DeleteButton>
@@ -61,7 +55,6 @@ export const MedicalRecordPage = () => {
           </tbody>
         </Styled.PatientListTable>
       </Styled.PatientList>
-      
     </>
   );
 };

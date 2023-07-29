@@ -31,7 +31,7 @@ export const StyledSelect = styled.select`
 `
 
 export const StyledButton = styled.button`
-  background-color: #4caf50;
+  background-color: ${props => !props.$delete ? '#56ab58' : '#c95555'}; 
   color: white;
   padding: 10px;
   margin-top: 10px;
