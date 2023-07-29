@@ -2,7 +2,7 @@ import React from 'react';
 import { InputGroup } from 'react-bootstrap';
 import { CustomFormControl, CustomAiOutlineSearch, CustomInputGroupText } from './SearchBar.style';
 
-const SearchBar = ({ setValorBuscado }) => {
+const SearchBar = ({ setSearchValue }) => {
   return (
     <InputGroup className="flex mr-4 items-center justify-center">
       <CustomInputGroupText>
@@ -11,8 +11,8 @@ const SearchBar = ({ setValorBuscado }) => {
       <CustomFormControl
         className='border-3'
         type='text'
-        placeholder='Digite o nome do paciente'
-        onChange={(e) => setValorBuscado(e.target.value)}
+        placeholder='Digite o nome, telefone ou email do paciente'
+        onChange={(e) => setSearchValue(e.target.value)}
       />
     </InputGroup>
   );

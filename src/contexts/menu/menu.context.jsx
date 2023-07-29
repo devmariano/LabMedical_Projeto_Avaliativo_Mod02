@@ -1,6 +1,13 @@
 import React, { createContext, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 
-const MenuContext = createContext();
+const MenuContext = createContext({
+  menuOpen: true,  
+  tittle: 'titulo pagina',  
+  setMenuOpen: () => {}, 
+  setTittle: () => {},
+  });
+
 
 export const MenuProvider = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -13,5 +20,9 @@ export const MenuProvider = ({ children }) => {
     </MenuContext.Provider>
   );
 };
+
+MenuProvider.propTypes = {
+  children: PropTypes.node,
+}
 
 export const useMenu = () => useContext(MenuContext);

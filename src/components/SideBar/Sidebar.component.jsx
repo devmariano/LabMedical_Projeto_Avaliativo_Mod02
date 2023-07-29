@@ -21,7 +21,7 @@ const handleLogoutClick = () => {
 
   return (
 <Styled.Sidebar $open={menuOpen}>
-      <Styled.Logo src='../../public/images/logo-white.png' />
+      <Styled.Logo src='/images/logo-white.png' />
       <Styled.MenuGroup>
         <Styled.Title>GERAL</Styled.Title>
         <Styled.Button onClick={() => {

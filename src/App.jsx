@@ -13,7 +13,6 @@ import { MedicalRecordPage } from './pages/MedicalRecord/MedicalRecord.page';
 import { PatientRegisterPage } from './pages/PatientRegister/PatientRegister.page';
 import { PatientRecordPage } from './pages/PatientRecord/PatientRecord.page';
 
-console.log(userData.users);
 
 if(!LocalStorageService.get('users')) {
   LocalStorageService.set('users', [...userData.users])
@@ -33,6 +32,7 @@ function App() {
           <Route path='/exam' element={<ExamPage/>}/>
           <Route path='/medicalrecord' element={<MedicalRecordPage/>}/>
           <Route path='/patientregister' element={<PatientRegisterPage/>}/>
+          <Route path='/edit-patient/:id' element={<PatientRegisterPage/>}/>
           <Route path='/patientrecord' element={<PatientRecordPage/>}/>
         </Route>
         <Route path='/login' element={<LoginPage/>}/>

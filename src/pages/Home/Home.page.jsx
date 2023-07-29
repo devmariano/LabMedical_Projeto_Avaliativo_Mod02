@@ -9,44 +9,75 @@ import CardPatient from "../../components/CardPatient/CardPatient.component";
 import { PatientService } from "../../services/Patient/Patient.service";
 
 
+
 export const HomePage = () => {
   const { setTittle } = useMenu();
   const [searchValue, setSearchValue] = useState(""); // State para armazenar o search value
   const [filteredPatients, setFilteredPatients] = useState([]); // State que armazena os array de pacientes filtrados
   const totalPatients = PatientService.getPatients();
+ 
 
   useEffect(() => {
     setTittle('ESTATÍSTICAS E INFORMAÇÕES');
     // Busca os pacientes no serviço
     const patients = PatientService.getPatients();
     
-    // Filtra os pacientes com base no valor da busca
-    const filtered = patients.filter(patient => patient.nome.toLowerCase().includes(searchValue.toLowerCase()));
-    setFilteredPatients(filtered);
-  }, [searchValue, setTittle]);
+  // Filtra os pacientes com base no valor da busca
+  const filtered = patients.filter((patient) => {
+    const lowerCaseSearchValue = searchValue.toLowerCase();
+    const lowerCaseNome = patient.nome.toLowerCase();
+    const lowerCaseTelefone = patient.telefone.toLowerCase();
+    const lowerCaseEmail = patient.email.toLowerCase();
+    
+    return (
+      lowerCaseNome.includes(lowerCaseSearchValue) ||
+      lowerCaseTelefone.includes(lowerCaseSearchValue) ||
+      lowerCaseEmail.includes(lowerCaseSearchValue)
+    );
+  });
+
+  setFilteredPatients(filtered);
+}, [searchValue, setTittle]);
 
 
   return (
     <Styled.Dasboard>
       <Container>
         <Styled.Title>Estatísticas do Sistema</Styled.Title>
-        <Row>
-          <Col>
-            <CardStatus title="Pacientes Cadastrados" value={totalPatients.length} color='#36d2b1' icon={<FaUser />} />
-          </Col>
-          <Col>
-            <CardStatus title="Consultas Cadastradas" value="50" color='#6674d2' icon={<FaStethoscope />} />
-          </Col>
-          <Col>
-            <CardStatus title="Exames Cadastrados" value="75" color='#e98b58' icon={<FaFileMedical />} />
-          </Col>
-        </Row>
+        <div className="row">
+        <div className="col-md-4">
+          <CardStatus
+            title="Pacientes Cadastrados"
+            value={totalPatients.length} 
+            icon={<FaUser />}
+            color="#36d2b1"
+          />
+        </div>
+
+        <div className="col-md-4">
+          <CardStatus
+            title="Consultas Cadastradas"
+            value={11}
+            icon={<FaStethoscope />}
+            color="#6674d2"
+          />
+        </div>
+
+        <div className="col-md-4">
+          <CardStatus
+            title="Exames Cadastrados"
+            value={12}
+            icon={<FaFileMedical />}
+            color="#e98b58"
+          />
+        </div>
+      </div>
         <Styled.Title>Informações Rápidas de Pacientes</Styled.Title>
-        <SearchBar setValorBuscado={setSearchValue} />
+        <SearchBar setSearchValue={setSearchValue} />
         <Row>
           {filteredPatients.map((patient, index) => (
             <Col key={index} xs={12} sm={6} md={4} lg={3}>
-              <CardPatient paciente={patient} />
+              <CardPatient patient={patient} />
             </Col>
           ))}
         </Row>

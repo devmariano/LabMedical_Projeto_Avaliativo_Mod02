@@ -3,9 +3,22 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import * as Styled from './CardPatient.style';
+import { Link } from 'react-router-dom';
 
-const CardPatient = ({ paciente }) => {
-  const { nome, idade, contato, planoSaude } = paciente;
+const calculateAge = (birthdate) => {
+  const birthdateObj = new Date(birthdate);
+  const today = new Date();
+  let age = today.getFullYear() - birthdateObj.getFullYear();
+  const monthDifference = today.getMonth() - birthdateObj.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdateObj.getDate())) {
+    age--;
+  }
+  return age;
+};
+
+const CardPatient = ({ patient }) => {
+  const { nome, dataNascimento, telefone, convenio } = patient;
+  const idade = calculateAge(patient.dataNascimento);
 
   return (
     <Styled.CardWrapper>
@@ -14,21 +27,23 @@ const CardPatient = ({ paciente }) => {
           <FaUser />
         </Styled.IconWrapper>
         <Styled.Name>{nome}</Styled.Name>
-        <Styled.Info>Idade: {idade}</Styled.Info>
-        <Styled.Info>{contato}</Styled.Info>
-        <Styled.Info>Plano de Saúde: {planoSaude}</Styled.Info>
-        <Styled.ButtonVerMais>Ver mais informações</Styled.ButtonVerMais>
+        <Styled.Info>{idade} Anos</Styled.Info>
+        <Styled.Info>{telefone}</Styled.Info>
+        {convenio ? <Styled.Info style={{ color: '#5fa361' }}>{convenio}</Styled.Info> : <Styled.Info style={{ color: '#f66e6e' }}>Sem Plano</Styled.Info> }
+        <Link to={`/edit-patient/${patient.id}`}>
+          <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
+        </Link>
       </Card.Body>
     </Styled.CardWrapper>
   );
 };
 
 CardPatient.propTypes = {
-  paciente: PropTypes.shape({
+  patient: PropTypes.shape({
     nome: PropTypes.string.isRequired,
-    idade: PropTypes.number.isRequired,
-    contato: PropTypes.string.isRequired,
-    planoSaude: PropTypes.string.isRequired,
+    idade: PropTypes.number,
+    telefone: PropTypes.string.isRequired,
+    convenio: PropTypes.string,
   }).isRequired,
 };
 
