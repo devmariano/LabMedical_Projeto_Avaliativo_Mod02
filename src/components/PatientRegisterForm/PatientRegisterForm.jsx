@@ -109,7 +109,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
     if (cep.length === 8) {
       try {
         const addressInfo = await getAddressInfo(cep);
-        alert(addressInfo.logradouro);
         setValue('logradouro', addressInfo.logradouro);
         setValue('bairro', addressInfo.bairro);
         setValue('cidade', addressInfo.cidade);
@@ -208,7 +207,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                     },
                 })}
             />
-            {errors.rg && <span>{errors.rg.message}</span>}
+            {errors.rg && <StyledAlert>{errors.rg.message}</StyledAlert>}
             </Child><Child>
             {/* Estado Civil */}
             <StyledLabel>Estado Civil:</StyledLabel>
@@ -222,6 +221,25 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                 <option value="outro">Outro</option>
             </StyledSelect>
             {errors.estadoCivil && <StyledAlert>{errors.estadoCivil.message}</StyledAlert>}
+            </Child>
+            <Child>
+            {/* Naturalidade */}
+            <StyledLabel>Naturalidade:</StyledLabel>
+            <StyledInput
+                type="text"
+                {...register('naturalidade', {
+                    required: 'Campo obrigatório',
+                    minLength: {
+                        value: 5,
+                        message: 'Mínimo 5 caracteres',
+                    },
+                    maxLength: {
+                        value: 50,
+                        message: 'Máximo 50 caracteres',
+                    },
+                })}
+            />
+            {errors.naturalidade && <StyledAlert>{errors.naturalidade.message}</StyledAlert>}
             </Child>
             </EqualDivider><EqualDivider>
             <Child>
@@ -251,7 +269,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                 })}
             />
             {errors.email && <span>{errors.email.message}</span>}
-            </Child><Child>
+            </Child>
+            <Child>
             {/* Contato de Emergência */}
             <StyledLabel>Contato de Emergência:</StyledLabel>
             <StyledInput
@@ -330,6 +349,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <StyledInput type="text" {...register('logradouro')} />
             <StyledLabel>Numero:</StyledLabel>
             <StyledInput type="text" {...register('numero')} />
+            <StyledLabel>Complemento:</StyledLabel>
+            <StyledInput type="text" {...register('complemento')} />
             </Child><Child>
             <StyledLabel>Bairro:</StyledLabel>
             <StyledInput type="text" {...register('bairro')} />
@@ -337,6 +358,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <StyledInput type="text" {...register('cidade')} />
             <StyledLabel>Estado:</StyledLabel>
             <StyledInput type="text" {...register('estado')} />
+            <StyledLabel>Ponto de referência:</StyledLabel>
+            <StyledInput type="text" {...register('referencia')} />
             </Child>
             </EqualDivider>
             {!isEditing ?
