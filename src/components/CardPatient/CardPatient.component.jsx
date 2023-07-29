@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import { FaUser } from 'react-icons/fa';
 import * as Styled from './CardPatient.style';
+import { Link } from 'react-router-dom';
 
 const calculateAge = (birthdate) => {
   const birthdateObj = new Date(birthdate);
@@ -29,7 +30,9 @@ const CardPatient = ({ paciente }) => {
         <Styled.Info>{idade} Anos</Styled.Info>
         <Styled.Info>{telefone}</Styled.Info>
         <Styled.Info>{convenio}</Styled.Info>
-        <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
+        <Link to={`/edit-patient/${paciente.id}`}>
+          <Styled.ButtonVerMais>Ver mais</Styled.ButtonVerMais>
+        </Link>
       </Card.Body>
     </Styled.CardWrapper>
   );

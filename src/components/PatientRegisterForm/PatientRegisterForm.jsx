@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel, EqualDivider, Child } from './PatientRegisterForm.styled';
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
@@ -27,6 +28,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('cpf', patientData.cpf);
         setValue('rg', patientData.rg);
         setValue('estadoCivil', patientData.estadoCivil);
+        setValue('naturalidade', patientData.naturalidade);
         setValue('telefone', patientData.telefone);
         setValue('email', patientData.email);
         setValue('contatoEmergencia', patientData.contatoEmergencia);
@@ -41,6 +43,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('bairro', patientData.bairro);
         setValue('cidade', patientData.cidade);
         setValue('estado', patientData.estado);
+        setValue('complemento', patientData.complemento);
+        setValue('referencia', patientData.referencia);
       } else {
         console.error(`Patient with ID ${id} not found.`);
         // Handle the case when the patient data is not found (e.g., redirect to an error page)
@@ -85,6 +89,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('cpf', "");
         setValue('rg', "");
         setValue('estadoCivil', "");
+        setValue('naturalidade', "");
         setValue('telefone', "");
         setValue('email', "");
         setValue('contatoEmergencia', "");
@@ -99,6 +104,8 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('bairro', "");
         setValue('cidade', "");
         setValue('estado', "");
+        setValue('complemento', "");
+        setValue('referencia', "");
         setIsDeleted(true); 
       }, 1500);
     }
@@ -119,6 +126,12 @@ const PatientRegisterForm = ({ isEditing = false }) => {
     }
   };
 
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+  const handleSwitchChange = (event) => {
+    setIsSwitchOn(event.target.checked); // Atualiza o estado quando o switch é clicado
+  };
+
     return (
         <> 
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -132,10 +145,18 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
           </Child>
           {isEditing && (
-            <Child>
-              {isDeleted ? <StyledButton type="submit" disabled='true' $disabled >Salvar alterações</StyledButton>  : <StyledButton type="submit" >Salvar alterações</StyledButton>}
-              {isDeleted ? <StyledButton type="button" $delete $disabled disabled='true' onClick={handleDeletePatient}>Deletar</StyledButton>  : <StyledButton type="button" $delete  onClick={handleDeletePatient}>Deletar</StyledButton>}
-            </Child>
+            <Child>   
+            <h5>Ativar edição do paciente</h5>
+            <Form.Switch
+            id="custom-switch"
+            label="desativado/ativado"
+            checked={isSwitchOn}
+            onChange={handleSwitchChange}/>
+              {isSwitchOn && (<>
+              {isDeleted ? <StyledButton type="submit" disabled $disabled >Salvar alterações</StyledButton>  : <StyledButton type="submit" >Salvar alterações</StyledButton>}
+              {isDeleted ? <StyledButton type="button" $delete $disabled disabled onClick={handleDeletePatient}>Deletar</StyledButton>  : <StyledButton type="button" $delete  onClick={handleDeletePatient}>Deletar</StyledButton>}
+              </>)}
+              </Child> 
           )}
         </EqualDivider>
         <EqualDivider><StyledLabel $tittle>DADOS PESSOAIS:</StyledLabel></EqualDivider>
