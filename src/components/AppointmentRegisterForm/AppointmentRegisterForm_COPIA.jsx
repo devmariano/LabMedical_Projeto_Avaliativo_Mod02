@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel, EqualDivider, Child } from './PatientRegisterForm.styled';
+import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, StyledLabel, EqualDivider, Child } from './AppointmentRegisterForm.styled';
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
 import LoadingSpinner from '../Loading/LoadingSpinner.component';
 import { useNavigate } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 
-const PatientRegisterForm = ({ isEditing = false }) => {
+const AppointmentRegisterForm = ({ isEditing = false }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [loading, setLoading] = useState(false); // Estado para controlar a exibição do spinner
   const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento
@@ -433,4 +433,4 @@ const PatientRegisterForm = ({ isEditing = false }) => {
     );
 };
 
-export default PatientRegisterForm;
+export default AppointmentRegisterForm;
