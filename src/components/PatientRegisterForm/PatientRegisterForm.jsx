@@ -6,21 +6,50 @@ import { StyledForm, StyledInput, StyledButton, StyledAlert, StyledSelect, Style
 import { PatientService } from '../../services/Patient/Patient.service';
 import getAddressInfo from '../../services/Address/AddressService';
 import LoadingSpinner from '../Loading/LoadingSpinner.component';
+import { useNavigate } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 
 const PatientRegisterForm = ({ isEditing = false }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-  const [loading, setLoading] = useState(false); // Estado para controlar a exibição do spinner
-  const [isSaved, setIsSaved] = useState(false); // Estado para controlar final do salvamento
-  const [isDeleted, setIsDeleted] = useState(false); // controla se aj foi deletado
+  const [loading, setLoading] = useState(false);
+  const [isSaved, setIsSaved] = useState(false); 
+  const [isDeleted, setIsDeleted] = useState(false); 
 
-  const { id } = useParams(); // Get the id parameter from the URL
+  const navigate = useNavigate();
+
+
+  const { id } = useParams(); 
   const parsedId = parseInt(id, 10);
 
   useEffect(() => {
+    if (!isEditing ) {
+        setValue('nome', "");
+        setValue('genero', "");
+        setValue('dataNascimento', "");
+        setValue('cpf', "");
+        setValue('rg', "");
+        setValue('estadoCivil', "");
+        setValue('naturalidade', "");
+        setValue('telefone', "");
+        setValue('email', "");
+        setValue('contatoEmergencia', "");
+        setValue('alergias', "");
+        setValue('cuidadosEspeciais', "");
+        setValue('convenio', "");
+        setValue('numeroConvenio', "");
+        setValue('validadeConvenio', "");
+        setValue('cep', "");
+        setValue('logradouro', "");
+        setValue('numero', "");
+        setValue('bairro', "");
+        setValue('cidade', "");
+        setValue('estado', "");
+        setValue('complemento', "");
+        setValue('referencia', "");
+    }
     if (isEditing && parsedId) {
-      // Fetch patient data using the id
+    scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuart' });
       const patientData = PatientService.getPatientById(parsedId);
-      // Check if patientData is not undefined before populating the form fields
       if (patientData) {
         setValue('nome', patientData.nome);
         setValue('genero', patientData.genero);
@@ -46,16 +75,14 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         setValue('complemento', patientData.complemento);
         setValue('referencia', patientData.referencia);
       } else {
-        console.error(`Patient with ID ${id} not found.`);
-        // Handle the case when the patient data is not found (e.g., redirect to an error page)
+        console.error(`Paciente com ID ${id} não encontrado.`);
       }
     }
   }, [isEditing, parsedId, setValue]);
 
   const onSubmit = (data) => {
-    setLoading(true); // Ativa o spinner
+    setLoading(true); 
     try {
-      // Lógica para salvar os dados no LocalStorage
       if (isEditing) {
         PatientService.updatePatient(parsedId, data);
       } else {
@@ -64,25 +91,26 @@ const PatientRegisterForm = ({ isEditing = false }) => {
     } catch (error) {
       console.error(error.message);
     } finally {
-      // Atraso de 2 segundos antes de desativar o spinner
       setTimeout(() => {
-        setLoading(false); // Desativa o spinner após 2 segundos
-        setIsSaved(true); //altera o state do salved
+        setLoading(false); 
+        setIsSaved(true); 
+        if (!isEditing) {
+ navigate(`/edit-patient/${PatientService.getLastId()}`);
+          }
       }, 1500);
     }
   };
 
   
   const handleDeletePatient = () => {
-    setLoading(true); // Ativa o spinner
+    setLoading(true); 
     try {
       PatientService.deletePatient(parsedId);
     } catch (error) {
       console.error(error.message);
     } finally {
-      // Atraso de 2 segundos antes de desativar o spinner
       setTimeout(() => {
-        setLoading(false); // Desativa o spinner após 2 segundos
+        setLoading(false); 
         setValue('nome', "");
         setValue('genero', "");
         setValue('dataNascimento', "");
@@ -112,7 +140,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
   };
 
   const handleCepChange = async (event) => {
-    const cep = event.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const cep = event.target.value.replace(/\D/g, ''); 
     if (cep.length === 8) {
       try {
         const addressInfo = await getAddressInfo(cep);
@@ -129,20 +157,22 @@ const PatientRegisterForm = ({ isEditing = false }) => {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const handleSwitchChange = (event) => {
-    setIsSwitchOn(event.target.checked); // Atualiza o estado quando o switch é clicado
+    setIsSaved(false)
+    setIsSwitchOn(event.target.checked); 
   };
+
+  
 
     return (
         <> 
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <EqualDivider>
           <Child>
-            <h3>{isEditing ? 'Atualização de cadastro' : ''}</h3>
+          {isDeleted == true && <div style={{ color: '#f17979' }}><h5>Removido com sucesso!</h5></div>}
+          {isSaved && isEditing && !isDeleted == true && <div style={{ color: '#6ac04e' }}><h5>Registrado com sucesso!</h5></div>}
+            {loading && <LoadingSpinner />} 
           </Child>
           <Child>
-          {isDeleted == true && <div style={{ color: '#f17979' }}><h5>Paciente deletado com sucesso!</h5></div>}
-          {isSaved && isEditing && !isDeleted == true && <div style={{ color: '#6ac04e' }}><h5>Paciente atualizado com sucesso!</h5></div>}
-            {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
           </Child>
           {isEditing && (
             <Child>   
@@ -162,7 +192,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
         <EqualDivider><StyledLabel $tittle>DADOS PESSOAIS:</StyledLabel></EqualDivider>
         <EqualDivider>
             <Child>
-            {/* Nome Completo */}
             <StyledLabel>Nome Completo:</StyledLabel>
             <StyledInput
                 type="text"
@@ -180,7 +209,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             />
             {errors.nome && <StyledAlert>{errors.nome.message}</StyledAlert>}
             </Child><Child>
-            {/* Gênero */}
             <StyledLabel>Gênero:</StyledLabel>
             <StyledSelect {...register('genero', { required: 'Campo obrigatório' })}>
                 <option value="">Selecione...</option>
@@ -192,7 +220,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             </StyledSelect>
             {errors.genero && <StyledAlert>{errors.genero.message}</StyledAlert>}
             </Child><Child>
-            {/* Data de Nascimento */}
             <StyledLabel>Data de Nascimento:</StyledLabel>
             <StyledInput
                 type="date"
@@ -201,7 +228,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {errors.dataNascimento && <StyledAlert>{errors.dataNascimento.message}</StyledAlert>}
             </Child>
             </EqualDivider><EqualDivider>
-            {/* CPF */}
             <Child>
             <StyledLabel>CPF:</StyledLabel>
             <StyledInput
@@ -216,7 +242,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             />
             {errors.cpf && <StyledAlert>{errors.cpf.message}</StyledAlert>}
             </Child><Child>
-            {/* RG com órgão expedidor */}
             <StyledLabel>RG com órgão expedidor:</StyledLabel>
             <StyledInput
                 type="text"
@@ -230,7 +255,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             />
             {errors.rg && <StyledAlert>{errors.rg.message}</StyledAlert>}
             </Child><Child>
-            {/* Estado Civil */}
             <StyledLabel>Estado Civil:</StyledLabel>
             <StyledSelect {...register('estadoCivil', { required: 'Campo obrigatório' })}>
                 <option value="">Selecione...</option>
@@ -244,7 +268,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {errors.estadoCivil && <StyledAlert>{errors.estadoCivil.message}</StyledAlert>}
             </Child>
             <Child>
-            {/* Naturalidade */}
             <StyledLabel>Naturalidade:</StyledLabel>
             <StyledInput
                 type="text"
@@ -264,7 +287,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             </Child>
             </EqualDivider><EqualDivider>
             <Child>
-            {/* Telefone */}
             <StyledLabel>Telefone:</StyledLabel>
             <StyledInput
                 type="text"
@@ -278,7 +300,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             />
             {errors.telefone && <StyledAlert>{errors.telefone.message}</StyledAlert>}
             </Child><Child>
-            {/* E-mail */}
             <StyledLabel>E-mail:</StyledLabel>
             <StyledInput
                 type="email"
@@ -292,7 +313,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {errors.email && <span>{errors.email.message}</span>}
             </Child>
             <Child>
-            {/* Contato de Emergência */}
             <StyledLabel>Contato de Emergência:</StyledLabel>
             <StyledInput
                 type="text"
@@ -310,13 +330,11 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <EqualDivider><StyledLabel $tittle>DADOS MÉDICOS:</StyledLabel>
             </EqualDivider><EqualDivider>
             <Child>
-            {/* Lista de Alergias */}
             <StyledLabel>Lista de Alergias:</StyledLabel>
             <StyledInput
                 type="text"
                 {...register('alergias')}
             />
-            {/* Lista de Cuidados Específicos */}
             <StyledLabel>Lista de Cuidados Específicos:</StyledLabel>
             <StyledInput
                 type="text"
@@ -325,21 +343,18 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             </Child>
             </EqualDivider><EqualDivider>
             <Child>
-            {/* Convênio */}
             <StyledLabel>Convênio:</StyledLabel>
             <StyledInput
                 type="text"
                 {...register('convenio')}
             />
             </Child><Child>
-            {/* Numero Convenio */}
             <StyledLabel>Numero do convênio:</StyledLabel>
             <StyledInput
                 type="text"
                 {...register('numeroConvenio')}
             />
             </Child><Child>
-            {/* validade Convenio */}
             <StyledLabel>Validade do convênio:</StyledLabel>
             <StyledInput
                 type="date"
@@ -350,7 +365,6 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <EqualDivider><StyledLabel $tittle>ENDEREÇO:</StyledLabel>
             </EqualDivider>
             <EqualDivider>  
-            {/* Campo para inserir o CEP */}
             <Child>
             <StyledLabel>CEP:</StyledLabel>
             <StyledInput
@@ -362,10 +376,9 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'CEP inválido (00000-000)',
                     },
                 })}
-                onChange={handleCepChange} // Chama a função de busca de endereço quando o campo perder o foco
+                onChange={handleCepChange} 
             />
             {errors.cep && <StyledAlert>{errors.cep.message}</StyledAlert>}
-            {/* Campos de endereço preenchidos automaticamente */}
             <StyledLabel>Logradouro:</StyledLabel>
             <StyledInput type="text" {...register('logradouro')} />
             <StyledLabel>Numero:</StyledLabel>
@@ -386,10 +399,9 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             {!isEditing ?
             <EqualDivider>
             <Child>
-            {isSaved==true && <div style={{ color: '#6ac04e' }}><h5>Salvo com sucesso!</h5></div>}
-            {loading && <LoadingSpinner />} {/* Exibe o spinner enquanto o formulário é enviado */}
+            {loading && <LoadingSpinner />} 
             </Child>
-            {isSaved==true ? <StyledButton type="submit" $disabled disabled>Salvar</StyledButton> : <StyledButton type="submit" >Salvar</StyledButton>}
+            <StyledButton type="submit" >Salvar</StyledButton>
             </EqualDivider>
             : ''}
         </StyledForm>

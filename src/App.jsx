@@ -29,6 +29,7 @@ function App() {
         <Route path='/' element={<Layout/>}>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/appointment' element={<AppointmentPage/>}/>
+          <Route path='/edit-appointment/:id' element={<AppointmentPage/>}/>
           <Route path='/exam' element={<ExamPage/>}/>
           <Route path='/medicalrecord' element={<MedicalRecordPage/>}/>
           <Route path='/patientregister' element={<PatientRegisterPage/>}/>

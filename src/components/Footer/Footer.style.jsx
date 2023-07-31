@@ -42,7 +42,7 @@ export const Img = styled.img`
 `;
 
 export const Title = styled.legend`
-  padding-left: 2rem;
+  padding-left: 1.5rem;
   color: #ffffff;
   font-size: 1%.5;
   font-style: normal;

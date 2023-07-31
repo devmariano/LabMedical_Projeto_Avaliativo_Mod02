@@ -1,5 +1,6 @@
 
 import styled  from 'styled-components';
+import { Form } from 'react-bootstrap';
 
 export const PatientList = styled.div`
   margin-top: 20px;
@@ -46,3 +47,10 @@ export const EditButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+
+export const SearchInput = styled(Form.Control)`
+  border: 3px solid #ccc; 
+  font-size: 1.2rem; 
+  color: #555; 
+`;
+
