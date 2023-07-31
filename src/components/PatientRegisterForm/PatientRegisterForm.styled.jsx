@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css }from "styled-components";
 import PropTypes from 'prop-types';
 
 export const StyledForm = styled.form`
@@ -29,7 +29,13 @@ export const StyledSelect = styled.select`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-`
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background-color: #f2f2f2;
+      color: #888;
+    `}
+`;
 
 export const StyledButton = styled.button`
   width: 45%;
