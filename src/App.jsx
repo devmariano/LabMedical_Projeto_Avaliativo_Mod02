@@ -45,7 +45,7 @@ function App() {
           <Route path='/medicalrecord' element={<MedicalRecordPage/>}/>
           <Route path='/patientregister' element={<PatientRegisterPage/>}/>
           <Route path='/edit-patient/:id' element={<PatientRegisterPage/>}/>
-          <Route path='/patientrecord' element={<PatientRecordPage/>}/>
+          <Route path='/patientrecord/:id' element={<PatientRecordPage/>}/>
         </Route>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='*' element={<><p>Pagina não existe</p></>}/>

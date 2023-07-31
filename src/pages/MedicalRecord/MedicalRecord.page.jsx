@@ -3,82 +3,76 @@ import * as Styled from './MedicalRecord.style';
 import { useMenu } from "../../contexts/menu/menu.context";
 import { PatientService } from '../../services/Patient/Patient.service';
 import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import { FaChevronRight } from 'react-icons/fa';
 
 export const MedicalRecordPage = () => {
   const { setTittle } = useMenu();
   const [patients, setPatients] = useState([]);
-  const [searchValue, setSearchValue] = useState(""); // Estado para armazenar o valor da busca
-
+  const [searchValue, setSearchValue] = useState(""); 
   useEffect(() => {
     setTittle('LISTAGEM DE PRONTUÁRIOS');
     fetchPatients();
   }, [setTittle]);
 
   const fetchPatients = () => {
-    // Fetch the list of patients from the PatientService
     const patientsData = PatientService.getPatients();
     setPatients(patientsData);
   };
 
-  // Função para filtrar os pacientes com base no valor da busca
   const handleSearch = (event) => {
     setSearchValue(event.target.value);
   };
 
-  // Filtra os pacientes com base no valor da busca
   const filteredPatients = patients.filter((patient) =>
     patient.nome.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const handleDeletePatient = (id) => {
-    // Call the deletePatient function from PatientService
-    PatientService.deletePatient(id);
-    // Fetch the updated list of patients
-    fetchPatients();
-  };
 
   return (
     <>
+    <Container fluid style={{ backgroundColor: '#f6f8fb', width: '100%', padding: 0 }}>
+      <Styled.StyledLabel>Utilize a barra de pesquisa para buscar</Styled.StyledLabel>
       <Styled.PatientList>
-        {/* Campo de busca */}
         <Styled.SearchInput
           type="text"
           placeholder="Digite o nome..."
           value={searchValue}
           onChange={handleSearch}
         />
-        <Styled.PatientListTitle>Registered Patients:</Styled.PatientListTitle>
-        <Styled.PatientListTable>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Genero</th>
-              <th>Data de Nascimento</th>
-              <th>gestão</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPatients.map((patient) => (
-              <tr key={patient.id}>
-                <td>{patient.nome}</td>
-                <td>{patient.genero}</td>
-                <td>{patient.dataNascimento}</td>
-                <td>
-                  {/* Edit button */}
-                  <Link to={`/edit-patient/${patient.id}`}>
-                    <Styled.EditButton>Edit</Styled.EditButton>
-                  </Link>
-                  {/* Delete button */}
-                  <Styled.DeleteButton onClick={() => handleDeletePatient(patient.id)}>
-                    Delete
-                  </Styled.DeleteButton>
-                </td>
+        <div className="table-responsive">
+          <table
+            className="table table-hover align-middle text-center"
+            style={{ borderCollapse: 'separate', borderSpacing: '0 2rem' }}
+          >
+            <thead>
+              <tr>
+                <th className="fs-5" scope="col"><Styled.StyledTittle>Registro</Styled.StyledTittle></th>
+                <th className="fs-5" scope="col"><Styled.StyledTittle>Paciente</Styled.StyledTittle></th>
+                <th className="fs-5" scope="col"><Styled.StyledTittle>Convênio</Styled.StyledTittle></th>
+                <th className="fs-5" scope="col"></th>
               </tr>
+            </thead>
+            <tbody>
+            {filteredPatients.map((patient) => (
+                  <Styled.PatientRow  key={patient.id} >
+                  <td><Styled.StyledData>{patient.id?.toString()?.padStart(10, '0')}</Styled.StyledData></td>
+                  <td><Styled.StyledData>{patient.nome}</Styled.StyledData></td>
+                  <td><Styled.StyledData>{patient.convenio || 'Sem Plano'}</Styled.StyledData></td>
+                  <td className="text-end">
+                    <Link to={`/patientrecord/${patient.id}`}>
+                    <Styled.IconWrapper>
+                    <FaChevronRight/>
+                    </Styled.IconWrapper>
+                    </Link>
+                  </td>
+                </Styled.PatientRow>
             ))}
           </tbody>
-        </Styled.PatientListTable>
+          </table>
+        </div>
       </Styled.PatientList>
-      
+      </Container>
     </>
   );
 };

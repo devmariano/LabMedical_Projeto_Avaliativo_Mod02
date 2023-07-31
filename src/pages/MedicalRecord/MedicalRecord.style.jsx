@@ -3,49 +3,9 @@ import styled  from 'styled-components';
 import { Form } from 'react-bootstrap';
 
 export const PatientList = styled.div`
+  padding-left: 40px;
+  padding-right: 40px;
   margin-top: 20px;
-`;
-
-export const PatientListTitle = styled.h2`
-  color: #145979;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
-export const PatientListTable = styled.table`
-  width: 100%;
-  margin-top: 10px;
-  border-collapse: collapse;
-
-  th,
-  td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f6f8fb;
-    color: #288c9d;
-  }
-`;
-
-export const DeleteButton = styled.button`
-  background-color: #f44336;
-  color: white;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
-export const EditButton = styled.button`
-  background-color: #f4ae36;
-  color: white;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 `;
 
 export const SearchInput = styled(Form.Control)`
@@ -53,4 +13,39 @@ export const SearchInput = styled(Form.Control)`
   font-size: 1.2rem; 
   color: #555; 
 `;
+
+export const IconWrapper = styled.div`
+  font-size: 2rem;
+  color: #549ABB;
+  margin-bottom: 1rem;
+`;
+
+export const PatientRow = styled.tr`
+  cursor: pointer;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Ajuste aqui para diminuir o sombreamento */
+`;
+
+export const StyledLabel = styled.label`
+  display: block;
+  margin-left: 40px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 28px;
+  color: #145979;
+`
+
+export const StyledTittle = styled.label`
+  font-weight: 700;
+  font-size: 22px;
+  color: #5f5f5f;
+`
+
+export const StyledData = styled.label`
+  font-weight: 500;
+  font-size: 18px;
+  color: #549ABB;
+`
 
