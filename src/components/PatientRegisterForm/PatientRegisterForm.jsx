@@ -206,24 +206,26 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Máximo 50 caracteres',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.nome && <StyledAlert>{errors.nome.message}</StyledAlert>}
             </Child><Child>
             <StyledLabel>Gênero:</StyledLabel>
-            <StyledSelect {...register('genero', { required: 'Campo obrigatório' })}>
+            <StyledSelect  {...register('genero', { required: 'Campo obrigatório' })} disabled={isEditing && !isSwitchOn} >
                 <option value="">Selecione...</option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
                 <option value="outro">Outro</option>
                 <option value="nao_binario">Não-Binário</option>
                 <option value="prefiro_nao_informar">Prefiro não informar</option>
-            </StyledSelect>
+            </StyledSelect >
             {errors.genero && <StyledAlert>{errors.genero.message}</StyledAlert>}
             </Child><Child>
             <StyledLabel>Data de Nascimento:</StyledLabel>
             <StyledInput
                 type="date"
                 {...register('dataNascimento', { required: 'Campo obrigatório' })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.dataNascimento && <StyledAlert>{errors.dataNascimento.message}</StyledAlert>}
             </Child>
@@ -239,6 +241,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Formato inválido (000.000.000-00)',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.cpf && <StyledAlert>{errors.cpf.message}</StyledAlert>}
             </Child><Child>
@@ -252,11 +255,12 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Máximo 20 caracteres',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.rg && <StyledAlert>{errors.rg.message}</StyledAlert>}
             </Child><Child>
             <StyledLabel>Estado Civil:</StyledLabel>
-            <StyledSelect {...register('estadoCivil', { required: 'Campo obrigatório' })}>
+            <StyledSelect {...register('estadoCivil', { required: 'Campo obrigatório' })} disabled={isEditing && !isSwitchOn}>
                 <option value="">Selecione...</option>
                 <option value="solteiro">Solteiro(a)</option>
                 <option value="casado">Casado(a)</option>
@@ -282,6 +286,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Máximo 50 caracteres',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.naturalidade && <StyledAlert>{errors.naturalidade.message}</StyledAlert>}
             </Child>
@@ -297,6 +302,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Formato inválido (99) 9 9999-99999',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.telefone && <StyledAlert>{errors.telefone.message}</StyledAlert>}
             </Child><Child>
@@ -309,6 +315,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'E-mail inválido',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.email && <span>{errors.email.message}</span>}
             </Child>
@@ -323,6 +330,7 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                         message: 'Formato inválido (99) 9 9999-99999',
                     },
                 })}
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.contatoEmergencia && <StyledAlert>{errors.contatoEmergencia.message}</StyledAlert>}
             </Child>
@@ -334,11 +342,13 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <StyledInput
                 type="text"
                 {...register('alergias')}
+                disabled={isEditing && !isSwitchOn}
             />
             <StyledLabel>Lista de Cuidados Específicos:</StyledLabel>
             <StyledInput
                 type="text"
                 {...register('cuidadosEspeciais')}
+                disabled={isEditing && !isSwitchOn}
             />
             </Child>
             </EqualDivider><EqualDivider>
@@ -347,18 +357,21 @@ const PatientRegisterForm = ({ isEditing = false }) => {
             <StyledInput
                 type="text"
                 {...register('convenio')}
+                disabled={isEditing && !isSwitchOn}
             />
             </Child><Child>
             <StyledLabel>Numero do convênio:</StyledLabel>
             <StyledInput
                 type="text"
                 {...register('numeroConvenio')}
+                disabled={isEditing && !isSwitchOn}
             />
             </Child><Child>
             <StyledLabel>Validade do convênio:</StyledLabel>
             <StyledInput
                 type="date"
                 {...register('validadeConvenio')}
+                disabled={isEditing && !isSwitchOn}
             />
             </Child>
             </EqualDivider>
@@ -377,23 +390,24 @@ const PatientRegisterForm = ({ isEditing = false }) => {
                     },
                 })}
                 onChange={handleCepChange} 
+                disabled={isEditing && !isSwitchOn}
             />
             {errors.cep && <StyledAlert>{errors.cep.message}</StyledAlert>}
             <StyledLabel>Logradouro:</StyledLabel>
-            <StyledInput type="text" {...register('logradouro')} />
+            <StyledInput type="text" {...register('logradouro')} disabled={isEditing && !isSwitchOn} />
             <StyledLabel>Numero:</StyledLabel>
-            <StyledInput type="text" {...register('numero')} />
+            <StyledInput type="text" {...register('numero')}  disabled={isEditing && !isSwitchOn} />
             <StyledLabel>Complemento:</StyledLabel>
-            <StyledInput type="text" {...register('complemento')} />
+            <StyledInput type="text" {...register('complemento')}  disabled={isEditing && !isSwitchOn} />
             </Child><Child>
             <StyledLabel>Bairro:</StyledLabel>
-            <StyledInput type="text" {...register('bairro')} />
+            <StyledInput type="text" {...register('bairro')}  disabled={isEditing && !isSwitchOn} />
             <StyledLabel>Cidade:</StyledLabel>
-            <StyledInput type="text" {...register('cidade')} />
+            <StyledInput type="text" {...register('cidade')}  disabled={isEditing && !isSwitchOn} />
             <StyledLabel>Estado:</StyledLabel>
-            <StyledInput type="text" {...register('estado')} />
+            <StyledInput type="text" {...register('estado')}  disabled={isEditing && !isSwitchOn} />
             <StyledLabel>Ponto de referência:</StyledLabel>
-            <StyledInput type="text" {...register('referencia')} />
+            <StyledInput type="text" {...register('referencia')}  disabled={isEditing && !isSwitchOn} />
             </Child>
             </EqualDivider>
             {!isEditing ?

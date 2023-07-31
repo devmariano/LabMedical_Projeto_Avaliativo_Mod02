@@ -1,8 +1,9 @@
-import styled, { css }from "styled-components";
+import styled from "styled-components";
 import PropTypes from 'prop-types';
 
 export const StyledForm = styled.form`
   width: 100%;
+  height: 100%;
   background-color: #f6f8fb;
   padding: 20px;
   border-radius: 5px;
@@ -11,8 +12,8 @@ export const StyledForm = styled.form`
 export const StyledLabel = styled.label`
   display: block;
   margin-bottom: 5px;
-  font-weight: ${props => props.$tittle ? '600' : '500'};
-  font-size: ${props => props.$tittle ? '22px' : '18px'};
+  font-weight: ${props => props.$tittle ? '700' : '500'};
+  font-size: ${props => props.$tittle ? '24px' : '18px'};
   color: ${props => props.$tittle ? '#145979' : '#288c9d'};
 `
 
@@ -23,19 +24,20 @@ export const StyledInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
 `
+export const StyledTextarea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical; /* Permite que o textarea seja redimensionado verticalmente */
+`;
 
 export const StyledSelect = styled.select`
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      background-color: #f2f2f2;
-      color: #888;
-    `}
-`;
+`
 
 export const StyledButton = styled.button`
   width: 45%;

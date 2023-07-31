@@ -1,0 +1,103 @@
+{"appointments":[
+  {
+    "id": 1,
+    "motivo": "Consulta de rotina",
+    "data": "2023-07-30",
+    "hora": "10:00",
+    "descricao": "Paciente se queixando de dor nas costas",
+    "medicacao": "Paracetamol",
+    "dosagem": "500mg",
+    "idPaciente": 3
+  },
+  {
+    "id": 2,
+    "motivo": "Exame de sangue",
+    "data": "2023-08-15",
+    "hora": "15:30",
+    "descricao": "Realização de exame de sangue para verificar perfil lipídico",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 5
+  },
+  {
+    "id": 3,
+    "motivo": "Consulta de acompanhamento",
+    "data": "2023-09-02",
+    "hora": "09:45",
+    "descricao": "Avaliação da pressão arterial e diabetes",
+    "medicacao": "Insulina",
+    "dosagem": "15 unidades",
+    "idPaciente": 1
+  },
+  {
+    "id": 4,
+    "motivo": "Consulta pediátrica",
+    "data": "2023-08-10",
+    "hora": "14:00",
+    "descricao": "Avaliação do desenvolvimento infantil",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 6
+  },
+  {
+    "id": 5,
+    "motivo": "Avaliação ortopédica",
+    "data": "2023-08-22",
+    "hora": "11:30",
+    "descricao": "Consulta para avaliar problema no joelho",
+    "medicacao": "Anti-inflamatório",
+    "dosagem": "50mg",
+    "idPaciente": 3
+  },
+  {
+    "id": 6,
+    "motivo": "Consulta dermatológica",
+    "data": "2023-09-05",
+    "hora": "16:15",
+    "descricao": "Avaliação de lesão na pele",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 2
+  },
+  {
+    "id": 7,
+    "motivo": "Consulta oftalmológica",
+    "data": "2023-08-18",
+    "hora": "09:00",
+    "descricao": "Avaliação da visão",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 4
+  },
+  {
+    "id": 8,
+    "motivo": "Consulta psicológica",
+    "data": "2023-08-25",
+    "hora": "17:30",
+    "descricao": "Acompanhamento psicológico",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 2
+  },
+  {
+    "id": 9,
+    "motivo": "Consulta de gastroenterologia",
+    "data": "2023-09-10",
+    "hora": "13:45",
+    "descricao": "Avaliação de problemas digestivos",
+    "medicacao": "Omeprazol",
+    "dosagem": "20mg",
+    "idPaciente": 6
+  },
+  {
+    "id": 10,
+    "motivo": "Consulta odontológica",
+    "data": "2023-09-15",
+    "hora": "08:30",
+    "descricao": "Avaliação e limpeza odontológica",
+    "medicacao": "",
+    "dosagem": "",
+    "idPaciente": 5
+  }
+]
+}

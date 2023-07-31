@@ -6,7 +6,9 @@ import { LocalStorageService } from './services/LocalStorage.service';
 import { LoginPage } from './pages/Login/Login.page';
 import { Layout } from './layout/Layout';
 import userData from './data/userData.json';
-import patientData from './data/patientData.json'
+import patientData from './data/patientData.json';
+import examData from './data/examData.json';
+import appointmentData from './data/appointmentData.json';
 import { AppointmentPage } from './pages/Appointment/Appointment.page';
 import { ExamPage } from './pages/Exam/Exam.page';
 import { MedicalRecordPage } from './pages/MedicalRecord/MedicalRecord.page';
@@ -22,6 +24,14 @@ if(!LocalStorageService.get('patients')) {
   LocalStorageService.set('patients', [...patientData.patients])
 }
 
+if(!LocalStorageService.get('exams')) {
+  LocalStorageService.set('exams', [...examData.exams])
+}
+
+if(!LocalStorageService.get('appointments')) {
+  LocalStorageService.set('appointments', [...appointmentData.appointments])
+}
+
 function App() {
   return (
     <Router>
@@ -31,6 +41,7 @@ function App() {
           <Route path='/appointment' element={<AppointmentPage/>}/>
           <Route path='/edit-appointment/:id' element={<AppointmentPage/>}/>
           <Route path='/exam' element={<ExamPage/>}/>
+          <Route path='/edit-exam/:id' element={<ExamPage/>}/>
           <Route path='/medicalrecord' element={<MedicalRecordPage/>}/>
           <Route path='/patientregister' element={<PatientRegisterPage/>}/>
           <Route path='/edit-patient/:id' element={<PatientRegisterPage/>}/>
