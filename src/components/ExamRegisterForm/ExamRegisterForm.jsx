@@ -28,12 +28,13 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
       scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuart' });
       const examData = ExamService.getExamById(parseInt(id, 10));
       if (examData) {
-        setValue('motivo', examData.motivo);
+        setValue('exame', examData.exame);
         setValue('data', examData.data);
         setValue('hora', examData.hora);
-        setValue('descricao', examData.descricao);
-        setValue('medicacao', examData.medicacao);
-        setValue('dosagem', examData.dosagem);
+        setValue('tipo', examData.tipo);
+        setValue('laboratorio', examData.laboratorio);
+        setValue('url', examData.url);
+        setValue('resultado', examData.resultado);
       } else {
         console.error(`Consulta com ID ${id} não encontrada.`);
       }
@@ -73,12 +74,13 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
     } finally {
       setTimeout(() => {
         setLoading(false);
-        setValue('motivo', "");
+        setValue('exame', "");
         setValue('data', "");
         setValue('hora', "");
-        setValue('descricao', "");
-        setValue('medicacao', "");
-        setValue('dosagem', "");
+        setValue('tipo', "");
+        setValue('laboratorio', "");
+        setValue('url', "");
+        setValue('resultado', "");
         setIsDeleted(true);
       }, 1500);
     }
@@ -145,31 +147,31 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
       
         {selectedPatient && (
           <EqualDivider><Child>
-            <StyledLabel $tittle>Consulta de {selectedPatient.nome}</StyledLabel>
+            <StyledLabel $tittle>Exame de {selectedPatient.nome}</StyledLabel>
           </Child></EqualDivider>
         )}
         <EqualDivider>
           <Child>
-            <StyledLabel>Motivo:</StyledLabel>
+            <StyledLabel>Nome do Exame:</StyledLabel>
             <StyledInput
               type="text"
-              {...register('motivo', {
+              {...register('exame', {
                 required: 'Campo obrigatório',
                 minLength: {
-                  value: 6,
-                  message: 'Mínimo 6 caracteres',
+                  value: 5,
+                  message: 'Mínimo 5 caracteres',
                 },
                 maxLength: {
-                  value: 60,
-                  message: 'Máximo 60 caracteres',
+                  value: 50,
+                  message: 'Máximo 50 caracteres',
                 },
               })}
               disabled={!selectedPatient || isEditing && !isSwitchOn} 
             />
-            {errors.motivo && <StyledAlert>{errors.motivo.message}</StyledAlert>}
+            {errors.exame && <StyledAlert>{errors.exame.message}</StyledAlert>}
           </Child>
           <Child>
-            <StyledLabel>Data da consulta:</StyledLabel>
+            <StyledLabel>Data do exame:</StyledLabel>
             <StyledInput
               type="date"
               {...register('data', { required: 'Campo obrigatório' })}
@@ -178,7 +180,7 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
             {errors.data && <StyledAlert>{errors.data.message}</StyledAlert>}
           </Child>
           <Child>
-            <StyledLabel>Horário da consulta:</StyledLabel>
+            <StyledLabel>Horário do exame:</StyledLabel>
             <StyledInput
               type="text"
               {...register('hora', { required: 'Campo obrigatório' })}
@@ -189,10 +191,57 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
         </EqualDivider>
         <EqualDivider>
           <Child>
-            <StyledLabel>Descrição do Problema:</StyledLabel>
+            <StyledLabel>Tipo do Exame:</StyledLabel>
+            <StyledInput
+              type="text"
+              {...register('tipo', {
+                required: 'Campo obrigatório',
+                minLength: {
+                  value: 5,
+                  message: 'Mínimo 5 caracteres',
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Máximo 30 caracteres',
+                },
+
+              })}
+              disabled={!selectedPatient || isEditing && !isSwitchOn} 
+            />
+            {errors.tipo && <StyledAlert>{errors.tipo.message}</StyledAlert>}
+            </Child>
+            <Child>
+            <StyledLabel>Laboratório:</StyledLabel>
+            <StyledInput
+              type="text"
+              {...register('laboratorio', {
+                required: 'Campo obrigatório',
+                minLength: {
+                  value: 5,
+                  message: 'Mínimo 5 caracteres',
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Máximo 30 caracteres',
+                },
+
+              })}
+              disabled={!selectedPatient || isEditing && !isSwitchOn} 
+            />
+            {errors.laboratorio && <StyledAlert>{errors.laboratorio.message}</StyledAlert>}
+            </Child>
+            </EqualDivider><EqualDivider>
+            <Child>
+            <StyledLabel>URL do Documento do Exame:</StyledLabel>
+            <StyledInput
+              type="text"
+              {...register('url')}
+              disabled={!selectedPatient || isEditing && !isSwitchOn} 
+            />
+            <StyledLabel>Resultado do Exame:</StyledLabel>
             <StyledTextarea
               type="text"
-              {...register('descricao', {
+              {...register('resultado', {
                 required: 'Campo obrigatório',
                 minLength: {
                   value: 15,
@@ -206,31 +255,7 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
               })}
               disabled={!selectedPatient || isEditing && !isSwitchOn} 
             />
-            {errors.descricao && <StyledAlert>{errors.descricao.message}</StyledAlert>}
-            <StyledLabel>Medicação Receitada:</StyledLabel>
-            <StyledTextarea
-              type="text"
-              {...register('medicacao')}
-              disabled={!selectedPatient || isEditing && !isSwitchOn} 
-            />
-            <StyledLabel>Dosagem e Precauções:</StyledLabel>
-            <StyledTextarea
-              type="text"
-              {...register('dosagem', {
-                required: 'Campo obrigatório',
-                minLength: {
-                  value: 15,
-                  message: 'Mínimo 15 caracteres',
-                },
-                maxLength: {
-                  value: 250,
-                  message: 'Máximo 250 caracteres',
-                },
-
-              })}
-              disabled={!selectedPatient || isEditing && !isSwitchOn} 
-            />
-            {errors.dosagem && <StyledAlert>{errors.dosagem.message}</StyledAlert>}
+            {errors.resultado && <StyledAlert>{errors.resultado.message}</StyledAlert>}
           </Child>
         </EqualDivider>
         {!isEditing ?
