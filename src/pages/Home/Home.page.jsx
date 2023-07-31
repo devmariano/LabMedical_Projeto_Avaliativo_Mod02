@@ -19,10 +19,9 @@ export const HomePage = () => {
 
   useEffect(() => {
     setTittle('ESTATÍSTICAS E INFORMAÇÕES');
-    // Busca os pacientes no serviço
     const patients = PatientService.getPatients();
     
-  // Filtra os pacientes com base no valor da busca
+
   const filtered = patients.filter((patient) => {
     const lowerCaseSearchValue = searchValue.toLowerCase();
     const lowerCaseNome = patient.nome.toLowerCase();

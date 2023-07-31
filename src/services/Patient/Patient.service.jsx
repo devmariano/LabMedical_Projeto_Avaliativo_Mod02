@@ -5,9 +5,17 @@ const appointmentsList = 'appointments';
 
 const getLastId = () => {
   const patients = getPatients();
-  const id = patients.length;
+  const id = patients.reduce((max, patients) => Math.max(max, patients.id), 0);
   return id;
 }
+
+const getLastAppointmentId = () => {
+  const appointments = getAppointments();
+  const id = appointments.reduce((max, appointment) => Math.max(max, appointment.id), 0);
+  return id;
+}
+
+getLastAppointmentId
 
 const getPatients = () => {
   return LocalStorageService.get(patientsList) || [];
@@ -40,12 +48,11 @@ const createPatient = (data) => {
 
 const createAppointment = (data) => {
   const appointments = getAppointments();
-    // Find the maximum id in the existing appointments
   const maxId = appointments.reduce((max, appointment) => Math.max(max, appointment.id), 0);
 
 
   const newAppointment = {
-    id: maxId + 1, // Increment the maximum id to get the new id
+    id: maxId + 1,
     ...data,
   };
 
@@ -109,6 +116,7 @@ export const AppointmentService = {
   createAppointment,
   updateAppointment,
   deleteAppointment,
-  getAppointmentById
+  getAppointmentById,
+  getLastAppointmentId,
 };
 

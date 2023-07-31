@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 export const StyledForm = styled.form`
   width: 100%;
-  height: 100%;
   background-color: #f6f8fb;
   padding: 20px;
   border-radius: 5px;
@@ -12,9 +11,10 @@ export const StyledForm = styled.form`
 export const StyledLabel = styled.label`
   display: block;
   margin-bottom: 5px;
-  font-weight: ${props => props.$tittle ? '700' : '500'};
-  font-size: ${props => props.$tittle ? '24px' : '18px'};
-  color: ${props => props.$tittle ? '#145979' : '#288c9d'};
+  font-weight: ${props => props.$tittle ? '600' : '500'};
+  font-size: ${props => props.$tittle ? '22px' : '20px'};
+  color: ${props => props.$tittle ? '#288c9d' : '#145979'};
+  cursor: ${props => props.$bt ? 'pointer' : ''};
 `
 
 
@@ -24,32 +24,18 @@ export const StyledInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
 `
-export const StyledTextarea = styled.textarea`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical; /* Permite que o textarea seja redimensionado verticalmente */
-`;
 
-export const StyledSelect = styled.select`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`
 
 export const StyledButton = styled.button`
-  width: 45%;
-  background-color: ${props => !props.$delete ? '#56ab58' : '#c95555'}; 
+  background-color: #c6c6c6; 
   color: white;
-  padding: 10px;
-  margin-top: 10px;
-  margin-left: 15px;
+  padding: 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  opacity: ${props => props.$disabled ? 0.5 : 1};
+  &:hover {
+    outline: 3px solid #0e7ee13b;
+  }
 `
 
 export const StyledAlert = styled.div`
@@ -86,6 +72,6 @@ padding: 0.25rem 0.5rem;
 
 
 EqualDivider.propTypes = {$vertical: PropTypes.bool}
-StyledButton.propTypes = {$delete: PropTypes.bool, $disabled: PropTypes.bool }
 StyledLabel.propTypes = {$tittle: PropTypes.bool }
+StyledLabel.propTypes = {$bt: PropTypes.bool }
 
