@@ -2,6 +2,7 @@ import { LocalStorageService } from "../LocalStorage.service";
 
 const patientsList = 'patients';
 const appointmentsList = 'appointments';
+const examsList = 'exams';
 
 const getLastId = () => {
   const patients = getPatients();
@@ -15,7 +16,12 @@ const getLastAppointmentId = () => {
   return id;
 }
 
-getLastAppointmentId
+const getLastExamId = () => {
+  const exams = getExams();
+  const id = exams.reduce((max, exam) => Math.max(max, exam.id), 0);
+  return id;
+}
+
 
 const getPatients = () => {
   return LocalStorageService.get(patientsList) || [];
@@ -25,12 +31,20 @@ const getAppointments = () => {
   return LocalStorageService.get(appointmentsList) || [];
 };
 
+const getExams = () => {
+  return LocalStorageService.get(examsList) || [];
+};
+
 const savePatients = (patients) => {
   LocalStorageService.set(patientsList, patients);
 };
 
 const saveAppointments = (appointments) => {
   LocalStorageService.set(appointmentsList, appointments);
+};
+
+const saveExams = (exams) => {
+  LocalStorageService.set(examsList, exams);
 };
 
 const createPatient = (data) => {
@@ -60,6 +74,20 @@ const createAppointment = (data) => {
   return newAppointment;
 };
 
+const createExam = (data) => {
+  const exams = getExams();
+  const maxId = exams.reduce((max, exam) => Math.max(max, exam.id), 0);
+
+
+  const newExam = {
+    id: maxId + 1,
+    ...data,
+  };
+
+  saveExams([...exams, newExam]);
+  return newExam;
+};
+
 const updatePatient = (id, data) => {
   const patients = getPatients();
 
@@ -80,6 +108,16 @@ const updateAppointment = (id, data) => {
   saveAppointments(updatedAppointments);
 };
 
+const updateExam = (id, data) => {
+  const exams = getExams();
+
+  const updatedExams = exams.map((exam) =>
+    exam.id === id ? { ...exam, ...data } : exam
+  );
+
+  saveExams(updatedExams);
+};
+
 const deletePatient = (id) => {
   const patients = getPatients();
   const updatedPatients = patients.filter((patient) => patient.id !== id);
@@ -92,6 +130,12 @@ const deleteAppointment = (id) => {
   saveAppointments(updatedAppointments);
 };
 
+const deleteExam = (id) => {
+  const exams = getExams();
+  const updatedExams = exams.filter((exam) => exam.id !== id);
+  saveExams(updatedExams);
+};
+
 const getPatientById = (id) => {
   const patients = getPatients();
   return patients.find((patient) => patient.id === id);
@@ -100,6 +144,11 @@ const getPatientById = (id) => {
 const getAppointmentById = (id) => {
   const appointments = getAppointments();
   return appointments.find((appointment) => appointment.id === id);
+};
+
+const getExamById = (id) => {
+  const exams = getExams();
+  return exams.find((exam) => exam.id === id);
 };
 
 export const PatientService = {
@@ -118,5 +167,14 @@ export const AppointmentService = {
   deleteAppointment,
   getAppointmentById,
   getLastAppointmentId,
+};
+
+export const ExamService = {
+  getExams,
+  createExam,
+  updateExam,
+  deleteExam,
+  getExamById,
+  getLastExamId,
 };
 
