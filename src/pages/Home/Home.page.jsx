@@ -6,7 +6,7 @@ import { useMenu } from "../../contexts/menu/menu.context";
 import CardStatus from "../../components/CardStatus/CardStatus";
 import SearchBar from "../../components/searchBar/searchBar.component";
 import CardPatient from "../../components/CardPatient/CardPatient.component";
-import { PatientService } from "../../services/Patient/Patient.service";
+import { PatientService, AppointmentService, ExamService } from "../../services/Patient/Patient.service";
 
 
 
@@ -15,6 +15,8 @@ export const HomePage = () => {
   const [searchValue, setSearchValue] = useState(""); // State para armazenar o search value
   const [filteredPatients, setFilteredPatients] = useState([]); // State que armazena os array de pacientes filtrados
   const totalPatients = PatientService.getPatients();
+  const totalExams = ExamService.getExams();
+  const totalAppointments = AppointmentService.getAppointments();
  
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export const HomePage = () => {
         <div className="col-md-4">
           <CardStatus
             title="Consultas Cadastradas"
-            value={11}
+            value={totalAppointments.length}
             icon={<FaStethoscope />}
             color="#6674d2"
           />
@@ -65,7 +67,7 @@ export const HomePage = () => {
         <div className="col-md-4">
           <CardStatus
             title="Exames Cadastrados"
-            value={12}
+            value={totalExams.length}
             icon={<FaFileMedical />}
             color="#e98b58"
           />
