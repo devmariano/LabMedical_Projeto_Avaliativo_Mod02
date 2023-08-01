@@ -17,12 +17,13 @@ const ExamRegisterForm = ({ isEditing = false, selectedPatient }) => {
 
   useEffect(() => {
     if (!isEditing) {
-      setValue('motivo', "");
+      setValue('exame', "");
       setValue('data', "");
       setValue('hora', "");
-      setValue('descricao', "");
-      setValue('medicacao', "");
-      setValue('dosagem', "");
+      setValue('tipo', "");
+      setValue('laboratorio', "");
+      setValue('url', "");
+      setValue('resultado', "");
     }
     if (isEditing && id) {
       scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuart' });
