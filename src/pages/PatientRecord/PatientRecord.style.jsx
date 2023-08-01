@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
-
 export const PageWrapper = styled.div`
   background-color: #f6f8fb;
   width: 100%;
@@ -20,37 +19,34 @@ export const PatientCard = styled(Card)`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-export const AppointmentCard = styled(Card)`
+export const ItemCard = styled(Card)`
   margin-bottom: 20px;
-  color: #116b66;
+  color: ${(props) => (props.type === "consulta" ? "#116b66" : "#16587b")};
   font-weight: 500;
   border: none;
-  background-color:#16989112;
+  background-color: ${(props) =>
+    props.type === "consulta" ? "#16989112" : "#1a689220"};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
-
-export const ExamCard = styled(Card)`
-  margin-bottom: 20px;
-  color: #16587b;
-  font-weight: 500;
-  border: none;
-  background-color:#1a689220;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
 
 export const CardTitle = styled(Card.Title)`
   margin-bottom: 0;
-`;
+  font-size: 1.7rem;
+  color: #145979;
+  padding-top:12px;
+  padding: 12px -12px;
 
+`;
 
 export const CardContent = styled(Card.Body)`
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const IconWrapper = styled.div`
   font-size: 4rem;
-  color: #549ABB;
+  color: #549abb;
   margin-bottom: 1rem;
   padding: 0%.5rem;
 `;
@@ -78,15 +74,43 @@ export const PatientDataLabel = styled.p`
 `;
 
 export const StyledButton = styled.button`
-
-  background-color: #f0a50ee2; 
+  background-color: #f0a50ee2;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 
   &:hover {
     background-color: #f0a50e;
   }
-`
+`;
+
+export const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const ConsultNumber = styled.span`
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #ecb511;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 12%;
+  margin-right: 10px;
+  z-index: 1; 
+  position: relative;
+`;
+
+export const DateTimeWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const DateTime = styled.div`
+  font-size: 1rem;
+  color: #427389;
+  margin-bottom: 10px;
+`;
