@@ -151,6 +151,16 @@ const getExamById = (id) => {
   return exams.find((exam) => exam.id === id);
 };
 
+const getAppointmentByPatientId = (patientId) => {
+  const appointments = getAppointments();
+  return appointments.filter((appointment) => appointment.idPaciente === patientId);
+};
+
+const getExamByPatientId = (patientId) => {
+  const exams = getExams();
+  return exams.filter((exam) => exam.idPaciente === patientId);
+};
+
 export const PatientService = {
   getLastId,
   getPatients,
@@ -167,6 +177,7 @@ export const AppointmentService = {
   deleteAppointment,
   getAppointmentById,
   getLastAppointmentId,
+  getAppointmentByPatientId,
 };
 
 export const ExamService = {
@@ -176,5 +187,5 @@ export const ExamService = {
   deleteExam,
   getExamById,
   getLastExamId,
+  getExamByPatientId,
 };
-
