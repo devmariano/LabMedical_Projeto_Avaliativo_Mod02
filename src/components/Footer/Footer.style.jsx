@@ -28,9 +28,9 @@ export const FooterRight= styled.div`
 
 
 export const Logo = styled.img`
-  height: 40px;
+  height: 2rem;
   margin-left: 35px;
-
+  padding-right:0.5rem;
 `;
 
 export const Img = styled.img`
@@ -43,19 +43,37 @@ export const Img = styled.img`
 
 export const Title = styled.legend`
   padding-left: 1.5rem;
-  color: #ffffff;
-  font-size: 1%.5;
+  color: #e4e4e4;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  padding-right:0.8rem;
 `;
 
 export const Name = styled.p`
-  padding-top: 1rem;
+  padding-top: 1.3rem;
+  padding-right: 0.4rem;
   color: #ffffff;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+`;
+
+
+export const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const IconLink = styled.a`
+  font-size: 24px;
+  margin: 0 5px;
+  color: #ffffff;
+
+  &:hover {
+    color: #1eaedb; 
+  }
 `;
 

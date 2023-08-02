@@ -73,6 +73,12 @@ export const PatientDataLabel = styled.p`
   margin-bottom: 0.25rem;
 `;
 
+export const DetailDataLabel = styled.p`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a666d;
+`;
+
 export const StyledButton = styled.button`
   background-color: #f0a50ee2;
   color: white;
@@ -110,7 +116,7 @@ export const DateTimeWrapper = styled.div`
 `;
 
 export const DateTime = styled.div`
-  font-size: 1rem;
-  color: #427389;
+  font-size: 1.1rem;
+  color: #4a666d;
   margin-bottom: 10px;
 `;

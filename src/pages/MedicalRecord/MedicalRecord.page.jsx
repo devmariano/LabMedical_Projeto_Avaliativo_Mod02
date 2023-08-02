@@ -28,6 +28,10 @@ export const MedicalRecordPage = () => {
     patient.nome.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const handleCardClick = (patientId) => {
+    window.location.href = `/patientrecord/${patientId}`;
+  };
+
 
   return (
     <>
@@ -54,21 +58,19 @@ export const MedicalRecordPage = () => {
               </tr>
             </thead>
             <tbody>
-            {filteredPatients.map((patient) => (
-                  <Styled.PatientRow  key={patient.id} >
-                  <td><Styled.StyledData>{patient.id?.toString()?.padStart(10, '0')}</Styled.StyledData></td>
-                  <td><Styled.StyledData>{patient.nome}</Styled.StyledData></td>
-                  <td><Styled.StyledData>{patient.convenio || 'Sem Plano'}</Styled.StyledData></td>
-                  <td className="text-end">
-                    <Link to={`/patientrecord/${patient.id}`}>
-                    <Styled.IconWrapper>
-                    <FaChevronRight/>
-                    </Styled.IconWrapper>
-                    </Link>
-                  </td>
-                </Styled.PatientRow>
-            ))}
-          </tbody>
+  {filteredPatients.map((patient) => (
+    <Styled.PatientRow key={patient.id} onClick={() => handleCardClick(patient.id)}>
+      <td><Styled.StyledData>{patient.id?.toString()?.padStart(10, '0')}</Styled.StyledData></td>
+      <td><Styled.StyledData>{patient.nome}</Styled.StyledData></td>
+      <td><Styled.StyledData>{patient.convenio || 'Sem Plano'}</Styled.StyledData></td>
+      <td className="text-end">
+        <Styled.IconWrapper>
+          <FaChevronRight />
+        </Styled.IconWrapper>
+      </td>
+    </Styled.PatientRow>
+  ))}
+</tbody>
           </table>
         </div>
       </Styled.PatientList>

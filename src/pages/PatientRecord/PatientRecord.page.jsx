@@ -8,6 +8,7 @@ import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useMenu } from "../../contexts/menu/menu.context";
 import { Col, Row } from "react-bootstrap";
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 
 export const PatientRecordPage = () => {
@@ -85,9 +86,9 @@ export const PatientRecordPage = () => {
                                             <p>{patient.contatoEmergencia}</p>
                                         </Styled.PatientData>
                                         <Styled.PatientData>
-                                            <Styled.PatientDataLabel>Alergias:</Styled.PatientDataLabel>
+                                            <Styled.PatientDataLabel>Lista de Alergias:</Styled.PatientDataLabel>
                                             <p>{patient.alergias || "Nenhuma"}</p>
-                                            <Styled.PatientDataLabel>Cuidados Específicos:</Styled.PatientDataLabel>
+                                            <Styled.PatientDataLabel>Lista de Cuidados Específicos:</Styled.PatientDataLabel>
                                             <p>{patient.cuidadosEspeciais}</p>
                                         </Styled.PatientData>
                                     </Styled.PatientDataRow>
@@ -109,7 +110,7 @@ export const PatientRecordPage = () => {
                             </Styled.DateTimeWrapper>
                                 {item.tipo === "consulta" ? (
                                     <>
-                                        <p>Motivo: {item.motivo}</p>
+                                        <Styled.DetailDataLabel>Motivo: {item.motivo}</Styled.DetailDataLabel>
                                         <p>Descrição do Problema: {item.descricao}</p>
                                         <p>Medicação Receitada: {item.medicacao}</p>
                                         <p>Dosagem e Precauções: {item.dosagem}</p>
@@ -121,8 +122,12 @@ export const PatientRecordPage = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <p>Nome do exame: {item.exame}</p>
-                                        <p>Laboratório: {item.laboratorio}</p>
+                                        <Styled.DetailDataLabel>Nome do exame: {item.exame}</Styled.DetailDataLabel>
+                                        <Styled.DetailDataLabel>Laboratório: {item.laboratorio}</Styled.DetailDataLabel>
+                                        <Styled.DetailDataLabel>Anexo: <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                        {item.url}<FaExternalLinkAlt />
+                                        </a></Styled.DetailDataLabel>
+                                        <p>Tipo do exame: {item.tipo}</p>
                                         <p>Resultado: {item.resultado}</p>
                                         <Styled.StyledButtonWrapper>
                                         <Link to={`/edit-exam/${item.id}`}>
