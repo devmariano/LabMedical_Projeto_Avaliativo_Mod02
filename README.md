@@ -32,7 +32,7 @@ O LabMedical segue o padrão **GitFlow** para gerenciar as versões do projeto. 
 
 **main:** A branch principal do projeto, que contém a versão mais estável e pronta para produção.
 
-**develop: **A branch de desenvolvimento, onde são integradas as features desenvolvidas.
+**develop:** A branch de desenvolvimento, onde são integradas as features desenvolvidas.
 
 **features:** Branches de features individuais, cada uma contendo uma funcionalidade específica em desenvolvimento.
 ###  Trello:
@@ -40,7 +40,7 @@ Foi utilizado Trello para organizar as tarefas de criação do projeto em cards 
  https://trello.com/invite/b/KuBHswX7/ATTIc5ba457c3d89ca515f993301d776112fAA9AACFB/labmedical-front-end
 
 ### Vídeo de apresentação: 
-https://drive.google.com/file/
+https://drive.google.com/file/d/1fVP3WA8vS22chn4Cjc5OWHWFFAIjsJma/view?usp=sharing
 
 
 ## 🧰 Técnicas e padrões utilizadas
@@ -77,5 +77,5 @@ npm run dev
 
 ## 💻 Demonstração da API 
 
-Aqui você pode testar o deploy da ultima versão:  (inserir link)
-
+Aqui você pode testar o deploy da ultima versão: 
+https://lab-medical-projeto-avaliativo-mod02.vercel.app/
