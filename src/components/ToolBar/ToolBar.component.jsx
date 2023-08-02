@@ -1,5 +1,5 @@
 
-import * as Styled from './Toolbar.style';
+import * as Styled from './ToolBar.style';
 import { useMenu } from "../../contexts/menu/menu.context";
 import { AuthContext } from '../../contexts/auth/auth.context';
 import { useContext } from 'react';
