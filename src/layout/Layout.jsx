@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react"
 import { useLocation } from 'react-router-dom';
 
 import { SideBar } from '../components/SideBar/Sidebar.component';
-import { ToolBar } from '../components/ToolBar/ToolBar.Component';
+import { ToolBar } from '../components/ToolBar/ToolBar.component';
 import { Footer } from '../components/Footer/Footer.component';
 
 
